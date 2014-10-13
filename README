@@ -1,0 +1,27 @@
+I keep my sample code for the algorithm class I'm teaching at
+Northeastern Unviersity (CS5800). The goal of this is to help students
+better understand the algorithms and techniques I cover in
+class. Hence, I try to make the code expressive, without worrying
+about making it general.
+
+The code is written in C++. And I chose to use google-mock to test
+it. So in order to run them, you need to have gmock and gtest
+installed.
+
+I've also used cmake to simplify the build process, and supplied each
+example with a CMakeLists.txt file (tough you may need to update the
+reference location for gmock and gtest lib). In general, you can
+follow the following steps to run each example.
+
+  mkdir mybuild
+  cd mybuild
+  cmake ..
+  make
+  ./test
+
+
+If you find any mistakes or have any suggestions, please reach me at
+austin.zhifeng.sun@gmail.com.
+
+
+-Zhifeng Sun
