@@ -1,16 +1,13 @@
+#include <algorithm>
 #include <functional>
 #include <initializer_list>
 #include <vector>
-#include "gmock/gmock.h"
-
-using namespace std;
-using namespace testing;
 
 // A max heap (using Cmp operator).
-template<typename T, typename Cmp = less<T>>
+template<typename T, typename Cmp = std::less<T>>
 class Heap {
 public:
-  Heap(initializer_list<T> l) : data_(l) {
+  Heap(std::initializer_list<T> l) : data_(l) {
     if (!IsEmpty()) {
       BuildHeap();
     }
@@ -33,13 +30,13 @@ public:
     int i = data_.size() - 1;
     while (i != ParentIndex(i) &&
 	   !Cmp()(data_[i], data_[ParentIndex(i)])) {
-      swap(data_[i], data_[ParentIndex(i)]);
+      std::swap(data_[i], data_[ParentIndex(i)]);
       i = ParentIndex(i);
     }
   }
 
   void Delete() {
-    swap(data_[0], data_[data_.size()-1]);
+    std::swap(data_[0], data_[data_.size()-1]);
     data_.pop_back();
     if (!IsEmpty()) {
       Heapify(0);
@@ -58,7 +55,7 @@ private:
       largest = RightChildIndex(cur);
     }
     if (largest != cur) {
-      swap(data_[cur], data_[largest]);
+      std::swap(data_[cur], data_[largest]);
       Heapify(largest);
     }
   }
@@ -91,45 +88,5 @@ private:
     return RightChildIndex(cur) < data_.size();
   }
 
-  vector<T> data_;
+  std::vector<T> data_;
 };
-
-TEST(HeapTest, MaxHeapStartEmpty) {
-  Heap<int> heap({});
-  EXPECT_THAT(heap.IsEmpty(), Eq(true));
-
-  int n = 10;
-  for (int i = 1; i <= n; i++) {
-    heap.Insert(i);
-  }
-  for (int i = n; i >= 1; --i) {
-    EXPECT_THAT(heap.GetMax(), Eq(i));
-    heap.Delete();
-  }
-  EXPECT_THAT(heap.IsEmpty(), Eq(true));
-}
-
-TEST(HeapTest, MinHeapStartEmpty) {
-  Heap<int, greater<int>> heap({});
-  EXPECT_THAT(heap.IsEmpty(), Eq(true));
-
-  int n = 10;
-  for (int i = 1; i <= n; i++) {
-    heap.Insert(i);
-  }
-  for (int i = 1; i <= n; ++i) {
-    EXPECT_THAT(heap.GetMax(), Eq(i));
-    heap.Delete();
-  }
-  EXPECT_THAT(heap.IsEmpty(), Eq(true));
-}
-
-TEST(HeapTest, HeapStartWithList) {
-  Heap<int> heap({1,3,2,6,4,5});
-  EXPECT_THAT(heap.IsEmpty(), Eq(false));
-  for (int i = 6; i >= 1; --i) {
-    EXPECT_THAT(heap.GetMax(), Eq(i));
-    heap.Delete();
-  }
-  EXPECT_THAT(heap.IsEmpty(), Eq(true));
-}
