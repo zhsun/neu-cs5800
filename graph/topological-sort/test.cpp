@@ -44,7 +44,7 @@ void Explore(const vector<list<int>>& graph,
 
 // Helper function to test ordering.
 int FindIndex(const vector<int>& arr, int elem) {
-  for (int i = 0; i < arr.size(); ++i) {
+  for (size_t i = 0; i < arr.size(); ++i) {
     if (arr[i] == elem) {
       return i;
     }
