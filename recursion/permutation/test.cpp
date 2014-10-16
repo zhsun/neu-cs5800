@@ -21,7 +21,7 @@ void PermutationRec(vector<int>* elems,
 		    int i,
 		    vector<vector<int>>* perms) {
   int n = elems->size();
-  if (i == n-1) {
+  if (i == n) {
     // Hit the base case.
     perms->emplace_back(elems->begin(), elems->end());
     return;
