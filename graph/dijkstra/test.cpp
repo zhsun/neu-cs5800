@@ -35,6 +35,9 @@ void Dijkstra(const vector<list<tuple<int,int>>>& graph,
     if ((*distance)[u] != numeric_limits<int>::max()) {
       for (const tuple<int,int>& t : graph[u]) {
 	int v = get<0>(t);
+	if (S.find(v) != S.end()) {
+	  continue;
+	}
 	int edge = get<1>(t);
 	if ((*distance)[u] + edge < (*distance)[v]) {
 	  (*distance)[v] = (*distance)[u] + edge;
