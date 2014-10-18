@@ -12,14 +12,18 @@
 //
 // The template type parameter T should be a light weight type (small
 // copy cost), which represents the "ID" of what your objects. In
-// Dijkstra's and Prim's algorithms, this T should be int (vertex id).
-template<typename T, typename Comparator = std::less<T>>
+// Dijkstra's and Prim's algorithms, this T should be int (vertex
+// id). The other template parameter P is for priority. Usually it
+// should be int or double.
+template<typename T,  // Type of elements
+	 typename P,  // Type of priroity
+	 typename Comparator = std::less<P>>
 class PriorityQueue {
 public:
   struct QueueElem {
-    QueueElem(const T& t, int p) : t_(t), p_(p) { }
+    QueueElem(const T& t, const P& p) : t_(t), p_(p) { }
     T t_;
-    int p_;
+    P p_;
   };
 
   PriorityQueue() : priorities_(), elem_index_map_() { }
@@ -32,7 +36,7 @@ public:
     return priorities_[0].t_;
   }
 
-  void Insert(const T& elem, int priority) {
+  void Insert(const T& elem, const P& priority) {
     priorities_.emplace_back(elem, priority);
     int cur = priorities_.size() - 1;
     elem_index_map_[elem] = cur;
@@ -45,13 +49,13 @@ public:
     Heapify(0);
   }
 
-  void Update(const T& elem, int new_priority) {
+  void Update(const T& elem, const P& new_priority) {
     if (elem_index_map_.find(elem) == elem_index_map_.end()) {
       // *elem* should be an existing element.
       return;
     }
     int idx = elem_index_map_[elem];
-    int old_priority = priorities_[idx].p_;
+    P old_priority = priorities_[idx].p_;
     priorities_[idx].p_ = new_priority;
     if (Comparator()(old_priority, new_priority)) {
       BubbleUp(idx);

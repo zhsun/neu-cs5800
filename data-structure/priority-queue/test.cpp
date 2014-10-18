@@ -5,12 +5,12 @@ using namespace std;
 using namespace testing;
 
 TEST(PriorityQueueTest, EmptyQueue) {
-  PriorityQueue<int> empty_q;
+  PriorityQueue<int,int> empty_q;
   EXPECT_THAT(empty_q.IsEmpty(), Eq(true));
 }
 
 TEST(PriorityQueueTest, LessThanComparator) {
-  PriorityQueue<char,less<char>> q;
+  PriorityQueue<char,int> q;
   q.Insert('d',4);
   q.Insert('b',2);
   q.Insert('a',1);
@@ -21,20 +21,24 @@ TEST(PriorityQueueTest, LessThanComparator) {
   EXPECT_THAT(q.GetMax(), Eq('f'));
   q.Delete();
   EXPECT_THAT(q.GetMax(), Eq('e'));
+  q.Update('a',6);  // inc a's priority
+  EXPECT_THAT(q.GetMax(), Eq('a'));
   q.Delete();
+  EXPECT_THAT(q.GetMax(), Eq('e'));
+  q.Update('e',1);  // dec e's priority
   EXPECT_THAT(q.GetMax(), Eq('d'));
   q.Delete();
   EXPECT_THAT(q.GetMax(), Eq('c'));
   q.Delete();
   EXPECT_THAT(q.GetMax(), Eq('b'));
   q.Delete();
-  EXPECT_THAT(q.GetMax(), Eq('a'));
+  EXPECT_THAT(q.GetMax(), Eq('e'));
   q.Delete();
   EXPECT_THAT(q.IsEmpty(), Eq(true));
 }
 
 TEST(PriorityQueueTest, GreaterThanComparator) {
-  PriorityQueue<char,greater<char>> q;
+  PriorityQueue<char,int,greater<int>> q;
   q.Insert('d',4);
   q.Insert('b',2);
   q.Insert('a',1);
@@ -44,15 +48,18 @@ TEST(PriorityQueueTest, GreaterThanComparator) {
   EXPECT_THAT(q.IsEmpty(), Eq(false));
   EXPECT_THAT(q.GetMax(), Eq('a'));
   q.Delete();
-  EXPECT_THAT(q.GetMax(), Eq('b'));
+  q.Update('e',1);
+  EXPECT_THAT(q.GetMax(), Eq('e'));
   q.Delete();
+  EXPECT_THAT(q.GetMax(), Eq('b'));
+  q.Update('b',7);
   EXPECT_THAT(q.GetMax(), Eq('c'));
   q.Delete();
   EXPECT_THAT(q.GetMax(), Eq('d'));
   q.Delete();
-  EXPECT_THAT(q.GetMax(), Eq('e'));
-  q.Delete();
   EXPECT_THAT(q.GetMax(), Eq('f'));
+  q.Delete();
+  EXPECT_THAT(q.GetMax(), Eq('b'));
   q.Delete();
   EXPECT_THAT(q.IsEmpty(), Eq(true));
 }
