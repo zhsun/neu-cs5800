@@ -1,6 +1,7 @@
 import msort
 import unittest
 
+
 class MSortTest(unittest.TestCase):
     def testMergeNormalList(self):
         A = [1, 3, 5, 7, 9]
@@ -21,6 +22,7 @@ class MSortTest(unittest.TestCase):
 
     def testMSortEmptyList(self):
         self.assertEqual(msort.msort([]), [])
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
