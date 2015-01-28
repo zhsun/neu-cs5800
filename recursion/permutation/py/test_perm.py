@@ -4,7 +4,7 @@ import unittest
 
 class PermutationTest(unittest.TestCase):
     def testZeroElem(self):
-        self.assertEqual(perm.permutation([]), [])
+        self.assertEqual(perm.permutation([]), [[]])
 
     def testSingleElem(self):
         self.assertEqual(perm.permutation([1]),
