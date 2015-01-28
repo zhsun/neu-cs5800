@@ -9,9 +9,7 @@ public class Permutation {
 
     private static void perms(int[] A, int pos, List<int[]> soln) {
 	if (pos == A.length) {
-	    int[] cur = new int[A.length];
-	    System.arraycopy(A, 0, cur, 0, A.length);
-	    soln.add(cur);
+	    soln.add(Arrays.copyOf(A, A.length));
 	    return;
 	}
 	for (int i = pos; i < A.length; i++) {

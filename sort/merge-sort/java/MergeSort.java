@@ -1,12 +1,12 @@
+import java.util.*;
+
 public class MergeSort {
     public static int[] sort(int[] A) {
-	if (A == null || A.length < 2) return A;
+	if (A.length < 2) return A;
 	int n = A.length;
-	int[] left = new int[n/2];
-	System.arraycopy(A, 0, left, 0, n/2);
+	int[] left = Arrays.copyOfRange(A, 0, n/2);
+	int[] right = Arrays.copyOfRange(A, n/2, n);
 	int[] sorted_left = MergeSort.sort(left);
-	int[] right = new int[n-n/2];
-	System.arraycopy(A, n/2, right, 0, n-n/2);
 	int[] sorted_right = MergeSort.sort(right);
 	return merge(sorted_left, sorted_right);
     }
