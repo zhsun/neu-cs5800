@@ -105,6 +105,7 @@ const Matrix operator-(const Matrix& A, const Matrix& B) {
 }
 
 int next_power_of_two(int n) {
+  if (n == 0) return 1;
   return 1 << static_cast<int>(ceil(log2(n)));
 }
 
