@@ -44,18 +44,18 @@ the unit test for quick sort), to run them simply use
 * Related environment settings
 
   # gmock
-  export GMOCK_HOME=/Users/zhifeng/lib/gmock-1.7.0
+  export GMOCK_HOME=$HOME/lib/gmock-1.7.0
 
   # cs5800 home directory
-  export CS5800_HOME=/Users/zhifeng/courses/neu-cs5800
+  export CS5800_HOME=$HOME/courses/neu-cs5800
 
   # junit
-  export JUNIT_HOME=/Users/zhifeng/lib/junit
+  export JUNIT_HOME=$HOME/lib/junit
   export CLASSPATH=$CLASSPATH:$JUNIT_HOME/junit.jar
   export CLASSPATH=$CLASSPATH:$JUNIT_HOME/hamcrest-core.jar
 
   # javatuples
-  export JAVATUPLES_HOME=/Users/zhifeng/lib/javatuples-1.2
+  export JAVATUPLES_HOME=$HOME/lib/javatuples-1.2
   export CLASSPATH=$CLASSPATH:$JAVATUPLES_HOME/lib/javatuples-1.2.jar
 
 
