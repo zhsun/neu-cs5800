@@ -18,7 +18,7 @@ namespace {
   }
 
   bool has_parent(size_t pos) {
-    return parent(pos) != pos;
+    return pos != 0;
   }
 
   bool has_left(size_t pos, size_t heap_size) {
