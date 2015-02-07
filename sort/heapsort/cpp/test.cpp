@@ -1,7 +1,7 @@
 #include <vector>
 #include "gmock/gmock.h"
 
-#include "data-structure/heap/cpp/heap_function.hpp"
+#include "data_structure/heap/cpp/heap_function.hpp"
 
 using namespace std;
 using namespace testing;
