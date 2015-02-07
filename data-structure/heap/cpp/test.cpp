@@ -1,4 +1,5 @@
-#include "data-structure/heap/cpp/heap.hpp"
+#include "heap.hpp"
+#include "heap_function.hpp"
 #include "gmock/gmock.h"
 
 using namespace std;
@@ -42,4 +43,15 @@ TEST(HeapTest, HeapStartWithList) {
     heap.Delete();
   }
   EXPECT_THAT(heap.IsEmpty(), Eq(true));
+}
+
+TEST(HeapFunctionTest, All) {
+  vector<int> arr = {1,3,2,6,4,5};
+  heap_make(arr);
+  EXPECT_THAT(arr.front(), Eq(6));
+  heap_delete(arr, arr.size());
+  EXPECT_THAT(arr.front(), Eq(5));
+  EXPECT_THAT(arr.back(), Eq(6));
+  heap_insert(arr, arr.size()-1, 7);
+  EXPECT_THAT(arr.front(), Eq(7));
 }
