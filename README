@@ -48,6 +48,7 @@ the unit test for quick sort), to run them simply use
 
   # cs5800 home directory
   export CS5800_HOME=$HOME/courses/neu-cs5800
+  export PYTHONPATH=PYTHONPATH:$CS5800_HOME
 
   # junit
   export JUNIT_HOME=$HOME/lib/junit
