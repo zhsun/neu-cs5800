@@ -1,5 +1,5 @@
 c:
-	javac -classpath $CLASSPATH:./heap.jar HeapSort.java TestHeapSort.java
+	javac -classpath ${CLASSPATH}:${CS5800_HOME}/data_structure/heap/java/heap.jar HeapSort.java TestHeapSort.java
 
 r:
-	java -classpath $CLASSPATH:./heap.jar TestHeapSort
+	java -classpath ${CLASSPATH}:${CS5800_HOME}/data_structure/heap/java/heap.jar TestHeapSort
