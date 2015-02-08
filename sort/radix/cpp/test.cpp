@@ -6,6 +6,7 @@
 using namespace std;
 using namespace testing;
 
+// digits means the number of digits for ints in arr.
 void radix_sort(vector<int>& arr, int digits) {
   for (int i = 0; i < digits; i++) {
     // key_fn will extract the ith digit (0-base) of a given int.
