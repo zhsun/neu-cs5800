@@ -28,8 +28,8 @@ bool HasCycle(const vector<list<int>>& graph) {
 }
 
 bool Explore(const vector<list<int>>& graph,
-	     vector<Color>& color,
-	     int node) {
+             vector<Color>& color,
+             int node) {
   color[node] = GRAY;
   bool has_cycle = false;
   for (int neighbor : graph[node]) {
