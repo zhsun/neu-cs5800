@@ -55,6 +55,10 @@ the unit test for quick sort), to run them simply use
   export CLASSPATH=$CLASSPATH:$JUNIT_HOME/junit.jar
   export CLASSPATH=$CLASSPATH:$JUNIT_HOME/hamcrest-core.jar
 
+  # apache common lang
+  export COMMOM_LANG_HOME=$HOME/lib/commons-lang3-3.3.2
+  export CLASSPATH=$CLASSPATH:$COMMOM_LANG_HOME/commons-lang3-3.3.2.jar
+
   # javatuples
   export JAVATUPLES_HOME=$HOME/lib/javatuples-1.2
   export CLASSPATH=$CLASSPATH:$JAVATUPLES_HOME/lib/javatuples-1.2.jar
