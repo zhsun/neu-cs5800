@@ -7,7 +7,7 @@ using namespace std;
 using namespace testing;
 
 class DFSVisitor {
-public:
+ public:
   virtual ~DFSVisitor() { };
 
   virtual void Preprocess(int node) { }
@@ -16,24 +16,24 @@ public:
 };
 
 class FinishTimeOrderVisitor : public DFSVisitor {
-public:
+ public:
   virtual ~FinishTimeOrderVisitor() { }
 
   virtual void Postprocess(int node) {
     sorted_.push_back(node);
   }
 
-  void GetSorted(vector<int>* s) {
-    s->resize(sorted_.size());
-    copy(sorted_.begin(), sorted_.end(), s->begin());
+  void GetSorted(vector<int>& s) {
+    s.resize(sorted_.size());
+    copy(sorted_.begin(), sorted_.end(), s.begin());
   }
 
-private:
+ private:
   vector<int> sorted_;
 };
 
 class LabelComponentVisitor : public DFSVisitor {
-public:
+ public:
   virtual ~LabelComponentVisitor() { }
 
   LabelComponentVisitor(int vertex_num) : cc_(vertex_num, -1), counter_(0) { }
@@ -49,38 +49,38 @@ public:
     cc_[neighbor] = cc_[node];
   }
 
-  void GetCC(vector<int>* s) {
-    s->resize(cc_.size());
-    copy(cc_.begin(), cc_.end(), s->begin());
+  void GetCC(vector<int>& s) {
+    s.resize(cc_.size());
+    copy(cc_.begin(), cc_.end(), s.begin());
   }
 
-private:
+ private:
   vector<int> cc_;
   int counter_;
 };
 
 void Explore(const vector<list<int>>& graph,
-	     int node,
-	     vector<bool>* visited,
-	     DFSVisitor* visitor) {
-  (*visited)[node] = true;
-  visitor->Preprocess(node);
+             int node,
+             vector<bool>& visited,
+             DFSVisitor& visitor) {
+  visited[node] = true;
+  visitor.Preprocess(node);
   for (int neighbor : graph[node]) {
-    if (!(*visited)[neighbor]) {
-      visitor->ProcessNeighbor(node, neighbor);
+    if (!visited[neighbor]) {
+      visitor.ProcessNeighbor(node, neighbor);
       Explore(graph, neighbor, visited, visitor);
     }
   }
-  visitor->Postprocess(node);
+  visitor.Postprocess(node);
 }
 
 void DFS(const vector<list<int>>& graph,
-	 const vector<int>& visit_order,
-	 DFSVisitor* visitor) {
+         const vector<int>& visit_order,
+         DFSVisitor& visitor) {
   vector<bool> visited(graph.size(), false);
   for (int node : visit_order) {
     if (!visited[node]) {
-      Explore(graph, node, &visited, visitor);
+      Explore(graph, node, visited, visitor);
     }
   }
 }
@@ -88,20 +88,20 @@ void DFS(const vector<list<int>>& graph,
 // SCC (strongly-connected-components) takes a graph in adjacency list
 // format, and returns a vector that tells the compoent number of each
 // vertex.
-void SCC(const vector<list<int>>& graph, vector<int>* cc) {
+void SCC(const vector<list<int>>& graph, vector<int>& cc) {
   int n = graph.size();
   vector<int> visit_order(n);
   for (int i = 0; i < n; ++i) {
     visit_order[i] = i;
   }
   FinishTimeOrderVisitor order_visitor;
-  DFS(graph, visit_order, &order_visitor);
+  DFS(graph, visit_order, order_visitor);
 
   vector<int> finish_time_order;
-  order_visitor.GetSorted(&finish_time_order);
+  order_visitor.GetSorted(finish_time_order);
 
   LabelComponentVisitor cc_visitor(n);
-  DFS(graph, finish_time_order, &cc_visitor);
+  DFS(graph, finish_time_order, cc_visitor);
   cc_visitor.GetCC(cc);
 }
 
@@ -109,7 +109,7 @@ void SCC(const vector<list<int>>& graph, vector<int>* cc) {
 TEST(SCCTest, NoEdgeGraph) {
   vector<list<int>> graph(5);
   vector<int> cc(5);
-  SCC(graph, &cc);
+  SCC(graph, cc);
   EXPECT_THAT(cc[0], Ne(cc[1]));
   EXPECT_THAT(cc[0], Ne(cc[2]));
   EXPECT_THAT(cc[0], Ne(cc[3]));
@@ -121,7 +121,7 @@ TEST(SCCTest, NoEdgeGraph) {
 TEST(SCCTest, TreeGraph) {
   vector<list<int>> graph = {{1,2},{3,4},{5},{},{},{}};
   vector<int> cc(6);
-  SCC(graph, &cc);
+  SCC(graph, cc);
   EXPECT_THAT(cc[0], Ne(cc[1]));
   EXPECT_THAT(cc[0], Ne(cc[2]));
   EXPECT_THAT(cc[0], Ne(cc[3]));
@@ -143,7 +143,7 @@ TEST(SCCTest, GeneralGraph) {
   graph[8] = {6};
   graph[9] = {8};
   vector<int> cc(10);
-  SCC(graph, &cc);
+  SCC(graph, cc);
   // 0 itself forms a cc.
   // 3 itself forms a cc.
   // 1 and 4 form a cc.
