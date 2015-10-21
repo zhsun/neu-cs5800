@@ -9,12 +9,11 @@ about making it general.
 
 * Programming languages
 
-The code is written in C++/Python/Java. I use unit tests to verify the
+The code is written in C++/Python. I use unit tests to verify the
 corretness of all algorithm implementations. Here are a list of unit
 test framework I use for each language.
 1) C++: gtest/gmock.
 2) Python: unittest lib.
-3) Java: JUnit.
 
 
 * How to execute
@@ -35,33 +34,11 @@ unit test for quick sort), to run them simply use
 
   python test_*.py
 
-3) Java: unit tests are in file Test*.java (e.g. TestQuickSort.java is
-the unit test for quick sort), to run them simply use
-
-  java Test*
-
 
 * Related environment settings
 
-  # gmock
-  export GMOCK_HOME=$HOME/lib/gmock-1.7.0
-
-  # cs5800 home directory
-  export CS5800_HOME=$HOME/courses/neu-cs5800
-  export PYTHONPATH=PYTHONPATH:$CS5800_HOME
-
-  # junit
-  export JUNIT_HOME=$HOME/lib/junit
-  export CLASSPATH=$CLASSPATH:$JUNIT_HOME/junit.jar
-  export CLASSPATH=$CLASSPATH:$JUNIT_HOME/hamcrest-core.jar
-
-  # apache common lang
-  export COMMOM_LANG_HOME=$HOME/lib/commons-lang3-3.3.2
-  export CLASSPATH=$CLASSPATH:$COMMOM_LANG_HOME/commons-lang3-3.3.2.jar
-
-  # javatuples
-  export JAVATUPLES_HOME=$HOME/lib/javatuples-1.2
-  export CLASSPATH=$CLASSPATH:$JAVATUPLES_HOME/lib/javatuples-1.2.jar
+  export GMOCK_HOME=${CS5800_HOME}/lib/gmock-1.7.0
+  export PYTHONPATH=PYTHONPATH:${CS5800_HOME}
 
 
 * Misc
