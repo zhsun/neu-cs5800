@@ -1,5 +1,4 @@
 *~
 *.pyc
-*.class
-*.jar
+*mybuild*
 
