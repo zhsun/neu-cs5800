@@ -38,8 +38,8 @@ void Explore(const unordered_set<string>& dict,
 	     unordered_set<string>* words) {
   int m = board.size();
   int n = board[0].size();
-  if (row < 0 || row >= m || 
-      col < 0 || col >= n || 
+  if (row < 0 || row >= m ||
+      col < 0 || col >= n ||
       (*visited)[row][col]) {
     return;
   }

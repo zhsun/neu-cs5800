@@ -1,0 +1,7 @@
+add_library(counting_sort STATIC counting_sort.hpp)
+set_target_properties(counting_sort PROPERTIES LINKER_LANGUAGE CXX)
+
+add_executable(counting_sort_unittest counting_sort_test.cpp)
+target_link_libraries(counting_sort_unittest 
+  counting_sort gmock_main)
+add_test(counting_sort_test counting_sort_unittest)
