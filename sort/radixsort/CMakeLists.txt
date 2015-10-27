@@ -1,0 +1,4 @@
+add_library(radix_sort radix_sort.cpp)
+
+add_gmock_test(radix_sort_unittest radix_sort_test.cpp)
+target_link_libraries(radix_sort_unittest radix_sort)

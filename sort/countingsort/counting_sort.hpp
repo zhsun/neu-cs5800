@@ -4,7 +4,7 @@
 // 'k' specifies the range of key_fn(T). [0...k].
 template<typename T, typename KeyFn>
 void counting_sort(const std::vector<T>& A, std::vector<T>& B,
-                   size_t k, KeyFn key_fn) {
+                   int k, KeyFn key_fn) {
   B.resize(A.size());
   std::vector<int> C(k+1, 0);
   for (const T& a : A) C[key_fn(a)]++;
