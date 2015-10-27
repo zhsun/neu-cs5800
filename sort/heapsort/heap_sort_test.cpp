@@ -1,17 +1,9 @@
 #include <vector>
 #include "gmock/gmock.h"
-
-#include "data_structure/heap/cpp/heap_function.hpp"
+#include "heap_sort.h"
 
 using namespace std;
 using namespace testing;
-
-void Heapsort(vector<int>& arr) {
-  heap_make(arr);
-  for (int i = arr.size(); i > 0; i--) {
-    heap_delete(arr, i);
-  }
-}
 
 TEST(HeapsortTest, SingleElementArr) {
   vector<int> arr = {1};

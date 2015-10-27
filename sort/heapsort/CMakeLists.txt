@@ -1,0 +1,4 @@
+add_library(heap_sort heap_sort.cpp)
+
+add_gmock_test(heap_sort_unittest heap_sort_test.cpp)
+target_link_libraries(heap_sort_unittest heap_sort)

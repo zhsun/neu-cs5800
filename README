@@ -18,27 +18,19 @@ test framework I use for each language.
 
 * How to execute
 
-1) C++: I've also used cmake to simplify the build process for C++,
-and supplied each example with a CMakeLists.txt file (tough you may
-need to update the reference location for gmock and gtest lib). In
-general, you can follow the following steps to run each example.
+1) C++: I've also used cmake to simplify the build process for C++.
+In general, you can follow the following steps to run each example.
 
-  mkdir mybuild
-  cd mybuild
+  mkdir build
+  cd build
   cmake ..
   make
-  ./test
+  make test
 
 2) Python: unit tests are in file test_*.py (e.g. test_qsort.py is the
 unit test for quick sort), to run them simply use
 
   python test_*.py
-
-
-* Related environment settings
-
-  export GMOCK_HOME=${CS5800_HOME}/lib/gmock-1.7.0
-  export PYTHONPATH=PYTHONPATH:${CS5800_HOME}
 
 
 * Misc

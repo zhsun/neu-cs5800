@@ -1,6 +1,5 @@
 #include <vector>
 #include "gmock/gmock.h"
-
 #include "counting_sort.hpp"
 
 using namespace std;
