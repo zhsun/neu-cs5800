@@ -1,12 +1,6 @@
-#include <cmath>
+#include <algorithm>
 #include <iterator>
-#include <vector>
-#include "gmock/gmock.h"
-
-using namespace std;
-using namespace testing;
-
-using Matrix = vector<vector<int>>;
+#include "strassen.h"
 
 // Forward declare.
 int next_power_of_two(int n);
@@ -22,18 +16,18 @@ Matrix strassen(const Matrix& A, const Matrix& B) {
   // cases in recursion.
   int n = A.size();
   int m = next_power_of_two(n);
-  Matrix largeA(m, vector<int>(m)); copy_matrix(A, largeA, n, 0, 0);
-  Matrix largeB(m, vector<int>(m)); copy_matrix(B, largeB, n, 0, 0);
+  Matrix largeA(m, std::vector<int>(m)); copy_matrix(A, largeA, n, 0, 0);
+  Matrix largeB(m, std::vector<int>(m)); copy_matrix(B, largeB, n, 0, 0);
   Matrix largeC = strassen_rec(largeA, largeB);
 
-  Matrix C(n, vector<int>(n));
+  Matrix C(n, std::vector<int>(n));
   copy_matrix(largeC, C, n, 0, 0);
   return C;
 }
 
 Matrix strassen_rec(const Matrix& A, const Matrix& B) {
   int n = A.size();
-  Matrix C(n, vector<int>(n));
+  Matrix C(n, std::vector<int>(n));
   if (n == 1) {
     C[0][0] = A[0][0] * B[0][0];
     return C;
@@ -63,12 +57,12 @@ void get_block_matrix(const Matrix& A, Matrix& a, Matrix& b, Matrix& c, Matrix& 
   int n = A.size();
   a.resize(n/2); b.resize(n/2); c.resize(n/2); d.resize(n/2);
   for (int r = 0; r < n/2; r++) {
-    copy(A[r].begin(), A[r].begin()+n/2, back_inserter(a[r]));
-    copy(A[r].begin()+n/2, A[r].end(), back_inserter(b[r]));
+    std::copy(A[r].begin(), A[r].begin()+n/2, std::back_inserter(a[r]));
+    std::copy(A[r].begin()+n/2, A[r].end(), std::back_inserter(b[r]));
   }
   for (int r = n/2; r < n; r++) {
-    copy(A[r].begin(), A[r].begin()+n/2, back_inserter(c[r-n/2]));
-    copy(A[r].begin()+n/2, A[r].end(), back_inserter(d[r-n/2]));
+    std::copy(A[r].begin(), A[r].begin()+n/2, std::back_inserter(c[r-n/2]));
+    std::copy(A[r].begin()+n/2, A[r].end(), std::back_inserter(d[r-n/2]));
   }
 }
 
@@ -76,14 +70,14 @@ void get_block_matrix(const Matrix& A, Matrix& a, Matrix& b, Matrix& c, Matrix& 
 // (upper left corner specified by "start_row" and "start_col").
 void copy_matrix(const Matrix& f, Matrix& t, int dim, int start_row, int start_col) {
   for (int r = 0; r < dim; r++) {
-    copy(f[r].begin(), f[r].end(), t[r+start_row].begin()+start_col);
+    std::copy(f[r].begin(), f[r].end(), t[r+start_row].begin()+start_col);
   }
 }
 
 // + operator for matrix.
 const Matrix operator+(const Matrix& A, const Matrix& B) {
   int n = A.size();
-  Matrix C(n, vector<int>(n));
+  Matrix C(n, std::vector<int>(n));
   for (int r = 0; r < n; r++) {
     for (int c = 0; c < n; c++) {
       C[r][c] = A[r][c] + B[r][c];
@@ -95,7 +89,7 @@ const Matrix operator+(const Matrix& A, const Matrix& B) {
 // - operator for matrix.
 const Matrix operator-(const Matrix& A, const Matrix& B) {
   int n = A.size();
-  Matrix C(n, vector<int>(n));
+  Matrix C(n, std::vector<int>(n));
   for (int r = 0; r < n; r++) {
     for (int c = 0; c < n; c++) {
       C[r][c] = A[r][c] - B[r][c];
@@ -107,66 +101,4 @@ const Matrix operator-(const Matrix& A, const Matrix& B) {
 int next_power_of_two(int n) {
   if (n == 0) return 1;
   return 1 << static_cast<int>(ceil(log2(n)));
-}
-
-TEST(StrassenTest, NextPowerOfTwo) {
-  EXPECT_THAT(next_power_of_two(0), Eq(1));
-  EXPECT_THAT(next_power_of_two(1), Eq(1));
-  EXPECT_THAT(next_power_of_two(2), Eq(2));
-  EXPECT_THAT(next_power_of_two(3), Eq(4));
-  EXPECT_THAT(next_power_of_two(13), Eq(16));
-  EXPECT_THAT(next_power_of_two(16), Eq(16));
-}
-
-TEST(StrassenTest, Operators) {
-  Matrix A = {{1,1},{2,2}};
-  Matrix B = {{1,2},{3,4}};
-  Matrix expected_add = {{2,3},{5,6}};
-  Matrix expected_minus = {{0,-1},{-1,-2}};
-  EXPECT_THAT(A+B, Eq(expected_add));
-  EXPECT_THAT(A-B, Eq(expected_minus));
-}
-
-TEST(StrassenTest, CopyMatrix) {
-  Matrix A = {{1,1},{2,2}};
-  Matrix B(4, vector<int>(4));
-  copy_matrix(A, B, A.size(), 0, 0);
-  Matrix expected = {{1,1,0,0},
-		     {2,2,0,0},
-		     {0,0,0,0},
-		     {0,0,0,0}};
-  EXPECT_THAT(B, Eq(expected));
-
-  Matrix C(4, vector<int>(4));
-  copy_matrix(A, C, A.size(), 1, 1);
-  expected = {{0,0,0,0},
-	      {0,1,1,0},
-	      {0,2,2,0},
-	      {0,0,0,0}};
-  EXPECT_THAT(C, Eq(expected));
-}
-
-TEST(StrassenTest, GetBlockMatrix) {
-  Matrix A = {{1,2},{3,4}};
-  Matrix a,b,c,d;
-  get_block_matrix(A, a, b, c, d);
-  Matrix expected_a = {{1}};
-  Matrix expected_b = {{2}};
-  Matrix expected_c = {{3}};
-  Matrix expected_d = {{4}};
-  EXPECT_THAT(a, Eq(expected_a));
-  EXPECT_THAT(b, Eq(expected_b));
-  EXPECT_THAT(c, Eq(expected_c));
-  EXPECT_THAT(d, Eq(expected_d));
-}
-
-TEST(StrassenTest, Strassen) {
-  Matrix A = {{1,1},{1,1}};
-  Matrix B = {{1,2},{3,4}};
-  Matrix expected = {{4,6},{4,6}};
-  EXPECT_THAT(strassen(A,B), Eq(expected));
-  A = {{1,2,3},{2,3,4},{3,4,5}};
-  B = {{1,1,1},{1,1,1},{1,1,1}};
-  expected = {{6,6,6},{9,9,9},{12,12,12}};
-  EXPECT_THAT(strassen(A,B), Eq(expected));
 }
