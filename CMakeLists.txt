@@ -17,6 +17,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${warnings}")
 add_definitions(-std=c++0x)
 
 # Add subdirectories
+add_subdirectory("recursion/combination")
 add_subdirectory("sort/countingsort")
 add_subdirectory("sort/heapsort")
 add_subdirectory("sort/mergesort")
