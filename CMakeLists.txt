@@ -18,6 +18,7 @@ add_definitions(-std=c++0x)
 
 # Add subdirectories
 add_subdirectory("recursion/combination")
+add_subdirectory("recursion/order_stats")
 add_subdirectory("sort/countingsort")
 add_subdirectory("sort/heapsort")
 add_subdirectory("sort/mergesort")

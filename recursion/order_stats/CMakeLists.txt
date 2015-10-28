@@ -1,0 +1,4 @@
+add_library(order_stats order_stats.cpp)
+
+add_gmock_test(order_stats_unittest order_stats_test.cpp)
+target_link_libraries(order_stats_unittest order_stats)
