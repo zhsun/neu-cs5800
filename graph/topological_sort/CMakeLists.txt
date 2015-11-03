@@ -1,0 +1,4 @@
+add_library(topological_sort topological_sort.cpp)
+
+add_gmock_test(topological_sort_unittest topological_sort_test.cpp)
+target_link_libraries(topological_sort_unittest topological_sort graph)
