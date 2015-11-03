@@ -1,3 +1,6 @@
+#ifndef GRAPH_GRAPH_H_
+#define GRAPH_GRAPH_H_
+
 #include <list>
 #include <map>
 #include <tuple>
@@ -27,3 +30,5 @@ class AdjacencyList final {
  private:
   std::vector<NeighborList> graph_;
 };
+
+#endif  // GRAPH_GRAPH_H_
