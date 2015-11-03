@@ -4,16 +4,25 @@
 AdjacencyList::AdjacencyList(int num_vertices) : graph_(num_vertices) {
 }
 
-int AdjacencyList::NumVertices() const {
+size_t AdjacencyList::NumVertices() const {
   return graph_.size();
 }
 
-void AdjacencyList::AddNeighbors(Vertex u, std::list<Vertex> neighbors) {
-  assert(u < graph_.size());
-  graph_[u].splice(graph_[u].end(), neighbors);
+void AdjacencyList::AddEdge(Vertex from, Vertex to) {
+  AddEdgeWithCost(from, to, 1.0);
 }
 
-const std::list<Vertex>& AdjacencyList::GetNeighbors(Vertex u) const {
-  assert(u < graph_.size());
+void AdjacencyList::AddEdgeWithCost(Vertex from, Vertex to, double cost) {
+  assert(from < NumVertices() && to < NumVertices());
+  graph_[from].push_back(std::make_tuple(to, cost));
+}
+
+NeighborList& AdjacencyList::GetNeighbors(Vertex u) {
+  assert(u < NumVertices());
+  return graph_[u];
+}
+
+const NeighborList& AdjacencyList::GetNeighbors(Vertex u) const {
+  assert(u < NumVertices());
   return graph_[u];
 }

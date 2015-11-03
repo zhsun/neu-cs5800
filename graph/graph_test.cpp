@@ -6,12 +6,22 @@ using namespace testing;
 
 TEST(Graph, AdjacencyList) {
   AdjacencyList graph(5);
-  graph.AddNeighbors(1, {2, 3, 4});
-  graph.AddNeighbors(3, {4});
-  graph.AddNeighbors(3, {5});
-  EXPECT_THAT(graph.GetNeighbors(0).empty(), Eq(true));
-  EXPECT_THAT(graph.GetNeighbors(1), ElementsAre(2, 3, 4));
-  EXPECT_THAT(graph.GetNeighbors(2).empty(), Eq(true));
-  EXPECT_THAT(graph.GetNeighbors(3), ElementsAre(4, 5));
-  EXPECT_THAT(graph.GetNeighbors(4).empty(), Eq(true));
+  graph.AddEdge(1, 2);
+  graph.AddEdge(1, 3);
+  graph.AddEdge(1, 4);
+  graph.AddEdge(3, 4);
+  graph.AddEdge(3, 2);
+  EXPECT_THAT(graph.NumVertices(), Eq(5));
+  auto neighbors = graph.GetNeighbors(1);
+  EXPECT_THAT(neighbors.size(), Eq(3));
+  neighbors = graph.GetNeighbors(2);
+  EXPECT_THAT(neighbors.size(), Eq(0));
+  const auto const_neighbors = graph.GetNeighbors(3);
+  EXPECT_THAT(const_neighbors.size(), Eq(2));
+  for (auto u : const_neighbors) {
+    Vertex v;
+    double cost;
+    std::tie(v, cost) = u;
+    EXPECT_THAT(cost, Eq(1.0));
+  }
 }

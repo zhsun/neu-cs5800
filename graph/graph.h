@@ -1,19 +1,29 @@
 #include <list>
+#include <map>
 #include <tuple>
 #include <vector>
 
-using Vertex = size_t;
-using Edge = std::tuple<Vertex, Vertex>;
+using Vertex = unsigned int;
+using Neighbor = std::tuple<Vertex, double>;
+using NeighborList = std::list<Neighbor>;
 
+// AdjacencyList representation of directed graph.
 class AdjacencyList final {
  public:
   explicit AdjacencyList(int num_vertices);
   ~AdjacencyList() = default;
+  // Disable ctor, assign op.
+  AdjacencyList() = delete;
+  AdjacencyList(const AdjacencyList&) = delete;
+  AdjacencyList& operator=(const AdjacencyList&) = delete;
 
-  void AddNeighbors(Vertex u, std::list<Vertex> neighbors);
-  const std::list<Vertex>& GetNeighbors(Vertex u) const;
-  int NumVertices() const;
+  void AddEdge(Vertex from, Vertex to);
+  void AddEdgeWithCost(Vertex from, Vertex to, double cost);
+  size_t NumVertices() const;
+
+  NeighborList& GetNeighbors(Vertex u);
+  const NeighborList& GetNeighbors(Vertex u) const;
 
  private:
-  std::vector<std::list<Vertex>> graph_;
+  std::vector<NeighborList> graph_;
 };
