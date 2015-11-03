@@ -18,7 +18,8 @@ class BST {
   // missing nodes. For example, given {"5","3","7","#","1","#","8"}
   // represents a valid binary search tree.
   template<typename Convertor>
-  static BST* build_from_list(std::initializer_list<std::string> l, Convertor convert) {
+  static BST* build_from_list(std::initializer_list<std::string> l,
+                              Convertor convert) {
     const std::string empty = "#";
     std::vector<BSTNode*> nodes;
     for (const std::string& elem : l) {

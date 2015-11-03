@@ -1,10 +1,9 @@
+#include <algorithm>
+#include <iterator>
 #include <memory>
 
 #include "gmock/gmock.h"
 #include "bst.hpp"
-
-#include <algorithm>
-#include <iterator>
 
 using namespace std;
 using namespace testing;
