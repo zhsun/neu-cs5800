@@ -3,6 +3,7 @@
 
 #include <list>
 #include <map>
+#include <ostream>
 #include <tuple>
 #include <vector>
 
@@ -15,10 +16,8 @@ class AdjacencyList final {
  public:
   explicit AdjacencyList(int num_vertices);
   ~AdjacencyList() = default;
-  // Disable ctor, assign op.
+  // Disable default ctor.
   AdjacencyList() = delete;
-  AdjacencyList(const AdjacencyList&) = delete;
-  AdjacencyList& operator=(const AdjacencyList&) = delete;
 
   void AddEdge(Vertex from, Vertex to);
   void AddEdgeWithCost(Vertex from, Vertex to, double cost);
@@ -26,6 +25,8 @@ class AdjacencyList final {
 
   NeighborList& GetNeighbors(Vertex u);
   const NeighborList& GetNeighbors(Vertex u) const;
+
+  friend std::ostream& operator<<(std::ostream& os, const AdjacencyList& graph);
 
  private:
   std::vector<NeighborList> graph_;

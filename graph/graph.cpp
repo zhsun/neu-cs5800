@@ -1,6 +1,8 @@
 #include <cassert>
 #include "graph.h"
 
+using std::ostream;
+
 AdjacencyList::AdjacencyList(int num_vertices) : graph_(num_vertices) {
 }
 
@@ -25,4 +27,18 @@ NeighborList& AdjacencyList::GetNeighbors(Vertex u) {
 const NeighborList& AdjacencyList::GetNeighbors(Vertex u) const {
   assert(u < NumVertices());
   return graph_[u];
+}
+
+ostream& operator<<(ostream& os, const AdjacencyList& graph) {
+  for (Vertex u = 0; u < graph.NumVertices(); ++u) {
+    os << u << ": ";
+    for (const Neighbor& neighbor : graph.GetNeighbors(u)) {
+      Vertex v;
+      double cost;
+      std::tie(v, cost) = neighbor;
+      os << "(" << v << "," << cost << ") ";
+    }
+    os << "\n";
+  }
+  return os;
 }
