@@ -1,5 +1,5 @@
-#include "data-structure/priority-queue/priority_queue.hpp"
 #include "gmock/gmock.h"
+#include "data_structure/priority_queue/priority_queue.hpp"
 
 using namespace std;
 using namespace testing;

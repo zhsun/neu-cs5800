@@ -1,0 +1,1 @@
+add_gmock_test(priority_queue_unittest priority_queue_test.cpp)

@@ -1,3 +1,4 @@
+#include <cassert>
 #include <functional>
 #include <unordered_map>
 #include <utility>
@@ -12,14 +13,14 @@
 //
 // The template type parameter T should be a light weight type (small
 // copy cost), which represents the "ID" of what your objects. In
-// Dijkstra's and Prim's algorithms, this T should be int (vertex
-// id). The other template parameter P is for priority. Usually it
-// should be int or double.
+// Dijkstra's and Prim's algorithms, this T should be vertex id. The
+// other template parameter P is for priority. Usually it should be
+// int or double.
 template<typename T,  // Type of elements
 	 typename P,  // Type of priroity
 	 typename Comparator = std::less<P>>
 class PriorityQueue {
-public:
+ public:
   struct QueueElem {
     QueueElem(const T& t, const P& p) : t_(t), p_(p) { }
     T t_;
@@ -37,24 +38,25 @@ public:
   }
 
   void Insert(const T& elem, const P& priority) {
+    // *elem* should be new element.
+    assert(elem_index_map_.find(elem) == elem_index_map_.end());
     priorities_.emplace_back(elem, priority);
-    int cur = priorities_.size() - 1;
+    size_t cur = priorities_.size() - 1;
     elem_index_map_[elem] = cur;
     BubbleUp(cur);
   }
 
   void Delete() {
-    Swap(0, priorities_.size()-1);
+    assert(!priorities_.empty());
+    Swap(0, priorities_.size() - 1);
     priorities_.pop_back();
     Heapify(0);
   }
 
   void Update(const T& elem, const P& new_priority) {
-    if (elem_index_map_.find(elem) == elem_index_map_.end()) {
-      // *elem* should be an existing element.
-      return;
-    }
-    int idx = elem_index_map_[elem];
+    // *elem* should be an existing element.
+    assert(elem_index_map_.find(elem) != elem_index_map_.end());
+    size_t idx = elem_index_map_[elem];
     P old_priority = priorities_[idx].p_;
     priorities_[idx].p_ = new_priority;
     if (Comparator()(old_priority, new_priority)) {
@@ -64,16 +66,16 @@ public:
     }
   }
 
-private:
+ private:
   // Swap cooresponding elements in priorities_, and update index map
   // properly.
-  void Swap(int a, int b) {
+  void Swap(size_t a, size_t b) {
     elem_index_map_[priorities_[a].t_] = b;
     elem_index_map_[priorities_[b].t_] = a;
     std::swap(priorities_[a], priorities_[b]);
   }
 
-  void BubbleUp(int cur) {
+  void BubbleUp(size_t cur) {
     while (cur != Parent(cur) &&
 	   !Comparator()(priorities_[cur].p_,
 			 priorities_[Parent(cur)].p_)) {
@@ -82,8 +84,8 @@ private:
     }
   }
 
-  void Heapify(int cur) {
-    int largest = cur;
+  void Heapify(size_t cur) {
+    size_t largest = cur;
     if (HasLeftChild(cur) &&
 	!Comparator()(priorities_[LeftChild(cur)].p_,
 		      priorities_[largest].p_)) {
@@ -100,25 +102,25 @@ private:
     }
   }
 
-  int LeftChild(int cur) const {
+  size_t LeftChild(size_t cur) const {
     return 2 * cur + 1;
   }
 
-  bool HasLeftChild(int cur) const {
+  bool HasLeftChild(size_t cur) const {
     return LeftChild(cur) < priorities_.size();
   }
 
-  int RightChild(int cur) const {
+  size_t RightChild(size_t cur) const {
     return 2 * cur + 2;
   }
 
-  bool HasRightChild(int cur) const {
+  bool HasRightChild(size_t cur) const {
     return RightChild(cur) < priorities_.size();
   }
 
-  int Parent(int cur) const {
-    // Use absolute value for root (index 0) case.
-    return abs(cur - 1) / 2;
+  size_t Parent(size_t cur) const {
+    if (cur == 0) return 0;
+    return (cur - 1) / 2;
   }
 
   // priorities_ is a vector of priorities values represented in heap
@@ -127,5 +129,5 @@ private:
   // elem_index_map_ is a map between elements of type T, and its
   // priority index in vector priorities_. E.g. if an element's index
   // is i, then priorities_[i] represents its priority value.
-  std::unordered_map<T,int> elem_index_map_;
+  std::unordered_map<T,size_t> elem_index_map_;
 };
