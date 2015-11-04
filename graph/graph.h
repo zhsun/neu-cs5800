@@ -8,6 +8,8 @@
 #include <vector>
 
 using Vertex = unsigned int;
+using Edge = std::tuple<Vertex, Vertex>;
+using EdgeWithCost = std::tuple<Vertex, Vertex, double>;
 using Neighbor = std::tuple<Vertex, double>;
 using NeighborList = std::list<Neighbor>;
 

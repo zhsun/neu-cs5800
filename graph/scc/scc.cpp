@@ -1,5 +1,4 @@
 #include <vector>
-#include <iostream>
 #include "graph/graph.h"
 #include "graph/topological_sort/topological_sort.h"
 #include "scc.h"

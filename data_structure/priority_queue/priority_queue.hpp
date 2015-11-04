@@ -39,7 +39,7 @@ class PriorityQueue {
 
   void Insert(const T& elem, const P& priority) {
     // *elem* should be new element.
-    assert(elem_index_map_.find(elem) == elem_index_map_.end());
+    assert(!Has(elem));
     priorities_.emplace_back(elem, priority);
     size_t cur = priorities_.size() - 1;
     elem_index_map_[elem] = cur;
@@ -47,15 +47,16 @@ class PriorityQueue {
   }
 
   void Delete() {
-    assert(!priorities_.empty());
+    assert(!IsEmpty());
     Swap(0, priorities_.size() - 1);
+    elem_index_map_.erase(priorities_.back().t_);
     priorities_.pop_back();
     Heapify(0);
   }
 
   void Update(const T& elem, const P& new_priority) {
     // *elem* should be an existing element.
-    assert(elem_index_map_.find(elem) != elem_index_map_.end());
+    assert(Has(elem));
     size_t idx = elem_index_map_[elem];
     P old_priority = priorities_[idx].p_;
     priorities_[idx].p_ = new_priority;
@@ -64,6 +65,10 @@ class PriorityQueue {
     } else {
       Heapify(idx);
     }
+  }
+
+  bool Has(const T& elem) const {
+    return elem_index_map_.find(elem) != elem_index_map_.end();
   }
 
  private:
