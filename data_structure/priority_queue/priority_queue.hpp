@@ -1,3 +1,6 @@
+#ifndef DATA_STRUCTURE_PRIORITY_QUEUE_H_
+#define DATA_STRUCTURE_PRIORITY_QUEUE_H_
+
 #include <cassert>
 #include <functional>
 #include <unordered_map>
@@ -136,3 +139,5 @@ class PriorityQueue {
   // is i, then priorities_[i] represents its priority value.
   std::unordered_map<T,size_t> elem_index_map_;
 };
+
+#endif  // DATA_STRUCTURE_PRIORITY_QUEUE_H_

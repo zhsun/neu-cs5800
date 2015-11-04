@@ -1,5 +1,5 @@
-#include "data-structure/disjoint-set/disjoint_set.cpp"
 #include "gmock/gmock.h"
+#include "disjoint_set.h"
 
 using namespace testing;
 

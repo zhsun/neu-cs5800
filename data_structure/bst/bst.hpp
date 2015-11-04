@@ -1,3 +1,6 @@
+#ifndef DATA_STRUCTURE_BST_H_
+#define DATA_STRUCTURE_BST_H_
+
 #include <initializer_list>
 #include <string>
 #include <vector>
@@ -225,3 +228,5 @@ class BST {
     BSTNode* parent_;
   };
 };
+
+#endif  // DATA_STRUCTURE_BST_H_
