@@ -1,0 +1,4 @@
+add_library(edit_distance edit_distance.cpp)
+
+add_gmock_test(edit_distance_unittest edit_distance_test.cpp)
+target_link_libraries(edit_distance_unittest edit_distance)
