@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <cmath>
 #include <iterator>
 #include "strassen.h"
 

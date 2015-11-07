@@ -1,12 +1,20 @@
-#include <cstdlib>
+#ifndef DATA_STRUCTURE_HEAP_FUNCTION_H_
+#define DATA_STRUCTURE_HEAP_FUNCTION_H_
 
+#include <cstddef>
+#include <cassert>
 #include <functional>
 #include <vector>
 
 namespace {
   // Helper functions.
+  bool has_parent(size_t pos) {
+    return pos != 0;
+  }
+
   size_t parent(size_t pos) {
-    return abs(pos - 1) / 2;
+    assert(has_parent(pos));
+    return (pos - 1) / 2;
   }
 
   size_t left(size_t pos) {
@@ -17,10 +25,6 @@ namespace {
     return pos * 2 + 2;
   }
 
-  bool has_parent(size_t pos) {
-    return pos != 0;
-  }
-
   bool has_left(size_t pos, size_t heap_size) {
     return left(pos) < heap_size;
   }
@@ -29,9 +33,9 @@ namespace {
     return right(pos) < heap_size;
   }
 
-  template<typename T, typename Cmp = std::less<T> >
+  template<typename T, typename Cmp = std::less<T>>
   void heapify(std::vector<T>& arr, size_t heap_size, size_t pos) {
-    int largest = pos;
+    size_t largest = pos;
     if (has_left(pos, heap_size) &&
 	!Cmp()(arr[left(pos)], arr[largest])) {
       largest = left(pos);
@@ -58,7 +62,7 @@ void heap_make(std::vector<T>& arr) {
 template<typename T, typename Cmp = std::less<T> >
 void heap_insert(std::vector<T>& arr, size_t heap_size, const T& val) {
   arr[heap_size++] = val;
-  int i = heap_size - 1;
+  size_t i = heap_size - 1;
   while (has_parent(i) &&
 	 !Cmp()(arr[i], arr[parent(i)])) {
     std::swap(arr[i], arr[parent(i)]);
@@ -71,3 +75,5 @@ void heap_delete(std::vector<T>& arr, size_t heap_size) {
   std::swap(arr[0], arr[--heap_size]);
   heapify(arr, heap_size, 0);
 }
+
+#endif  // DATA_STRUCTURE_HEAP_FUNCTION_H_

@@ -1,3 +1,6 @@
+#ifndef SORT_COUNTINGSORT_H_
+#define SORT_COUNTINGSORT_H_
+
 #include <vector>
 
 // KeyFn is a functor that maps T to int.
@@ -14,3 +17,5 @@ void counting_sort(const std::vector<T>& A, std::vector<T>& B,
     B[pos] = A[i];
   }
 }
+
+#endif  // SORT_COUNTINGSORT_H_

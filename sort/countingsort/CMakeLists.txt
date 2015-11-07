@@ -1,5 +1,1 @@
-add_library(counting_sort counting_sort.hpp)
-set_target_properties(counting_sort PROPERTIES LINKER_LANGUAGE CXX)
-
 add_gmock_test(counting_sort_unittest counting_sort_test.cpp)
-target_link_libraries(counting_sort_unittest counting_sort)
