@@ -1,0 +1,4 @@
+add_library(geometry_base base.cpp)
+
+add_gmock_test(geometry_base_unittest base_test.cpp)
+target_link_libraries(geometry_base_unittest geometry_base)

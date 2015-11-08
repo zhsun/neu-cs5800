@@ -9,7 +9,7 @@ include(gmock)
 # Set up complie error options.
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" OR
     "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-  set(warnings "-Wall -Wextra")
+  set(warnings "-Wall -Wextra -Werror")
 endif()
 set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS} ${warnings}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${warnings}")
@@ -44,3 +44,4 @@ add_subdirectory("dp/edit_distance")
 add_subdirectory("dp/knapsack")
 add_subdirectory("dp/matrix_multiplication")
 add_subdirectory("dp/lis")
+add_subdirectory("geometry")
