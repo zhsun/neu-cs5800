@@ -1,0 +1,4 @@
+add_library(point_to_line point_to_line.cpp)
+
+add_gmock_test(point_to_line_unittest point_to_line_test.cpp)
+target_link_libraries(point_to_line_unittest point_to_line geometry_base)
