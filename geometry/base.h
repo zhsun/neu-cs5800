@@ -5,6 +5,7 @@
 // starts at origin.
 class Point final {
  public:
+  Point() = default;
   Point(double x, double y);
   // Distance to origin.
   double Norm() const;
