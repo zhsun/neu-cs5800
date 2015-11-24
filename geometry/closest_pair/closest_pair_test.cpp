@@ -26,4 +26,8 @@ TEST(ClosestPairTest, GeneralCase) {
               DoubleEq(EuclideanDistance(expected_a, expected_b)));
   EXPECT_THAT(vector<Point>({a, b}),
               UnorderedElementsAre(expected_a, expected_b));
+  EXPECT_THAT(ClosestPair(points, a, b, ManhattanDistance),
+              DoubleEq(ManhattanDistance(expected_a, expected_b)));
+  EXPECT_THAT(vector<Point>({a, b}),
+              UnorderedElementsAre(expected_a, expected_b));
 }
