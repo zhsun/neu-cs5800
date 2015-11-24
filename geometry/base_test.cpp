@@ -47,3 +47,15 @@ TEST(BaseTest, Norm) {
   EXPECT_THAT(Point(0, -2).Norm(), Eq(2));
   EXPECT_THAT(Point(1, 1).Norm(), Eq(Point(-1, -1).Norm()));
 }
+
+TEST(BaseTest, EuclideanDistance) {
+  EXPECT_THAT(EuclideanDistance(Point(-1, 0), Point(1, 0)), DoubleEq(2));
+  EXPECT_THAT(EuclideanDistance(Point(0, -1), Point(0, 1)), DoubleEq(2));
+  EXPECT_THAT(EuclideanDistance(Point(0, 0), Point(1, 1)), DoubleEq(sqrt(2)));
+}
+
+TEST(BaseTest, ManhattanDistance) {
+  EXPECT_THAT(ManhattanDistance(Point(-1, 0), Point(1, 0)), DoubleEq(2));
+  EXPECT_THAT(ManhattanDistance(Point(0, -1), Point(0, 1)), DoubleEq(2));
+  EXPECT_THAT(ManhattanDistance(Point(0, 0), Point(1, 1)), DoubleEq(2));
+}

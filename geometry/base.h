@@ -19,10 +19,15 @@ class Point final {
   double x() const;
   double y() const;
 
+  bool operator==(const Point& o) const;
+
  private:
   double x_;
   double y_;
 };
+
+double EuclideanDistance(const Point& a, const Point& b);
+double ManhattanDistance(const Point& a, const Point& b);
 
 // Sum of vector <(0,0)->A> and vector <(0,0)->B>.
 Point operator+(const Point& A, const Point& B);

@@ -1,0 +1,5 @@
+add_library(closest_pair closest_pair.cpp)
+target_link_libraries(closest_pair geometry_base)
+
+add_gmock_test(closest_pair_unittest closest_pair_test.cpp)
+target_link_libraries(closest_pair_unittest closest_pair geometry_base)

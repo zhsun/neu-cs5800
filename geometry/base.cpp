@@ -28,6 +28,19 @@ double Point::y() const {
   return y_;
 }
 
+bool Point::operator==(const Point& o) const {
+  return x() == o.x() && y() == o.y();
+}
+
+double EuclideanDistance(const Point& a, const Point& b) {
+  return sqrt((a.x() - b.x()) * (a.x() - b.x()) +
+              (a.y() - b.y()) * (a.y() - b.y()));
+}
+
+double ManhattanDistance(const Point& a, const Point& b) {
+  return fabs(a.x() - b.x()) + fabs(a.y() - b.y());
+}
+
 Point operator+(const Point& A, const Point& B) {
   return Point(A.x() + B.x(), A.y() + B.y());
 }
