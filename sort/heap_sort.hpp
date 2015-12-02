@@ -5,19 +5,19 @@
 #include <functional>
 #include <iterator>
 
-template<typename RandomeAccessIterator, typename Compare>
-void HeapSort(RandomeAccessIterator begin, RandomeAccessIterator end, 
+template<typename RandomAccessIterator, typename Compare>
+void HeapSort(RandomAccessIterator begin, RandomAccessIterator end, 
 	      Compare comp) {
   std::make_heap(begin, end, comp);
-  for (RandomeAccessIterator itr = end; itr != begin; --itr) {
+  for (RandomAccessIterator itr = end; itr != begin; --itr) {
     std::pop_heap(begin, itr, comp);
   }
 }
 
-template<typename RandomeAccessIterator>
-void HeapSort(RandomeAccessIterator begin, RandomeAccessIterator end) {
+template<typename RandomAccessIterator>
+void HeapSort(RandomAccessIterator begin, RandomAccessIterator end) {
   using value_type =
-    typename std::iterator_traits<RandomeAccessIterator>::value_type;
+    typename std::iterator_traits<RandomAccessIterator>::value_type;
   HeapSort(begin, end, std::less<value_type>());
 }
 

@@ -1,4 +1,0 @@
-add_library(merge_sort merge_sort.cpp)
-
-add_gmock_test(merge_sort_unittest merge_sort_test.cpp)
-target_link_libraries(merge_sort_unittest merge_sort)

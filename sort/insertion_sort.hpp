@@ -5,24 +5,24 @@
 #include <iterator>
 #include <utility>
 
-template<typename RandomeAccessIterator, typename Compare>
-void InsertionSort(RandomeAccessIterator begin,
-		   RandomeAccessIterator end,
+template<typename RandomAccessIterator, typename Compare>
+void InsertionSort(RandomAccessIterator begin,
+		   RandomAccessIterator end,
 		   Compare comp) {
   if (begin == end) return;
-  for (RandomeAccessIterator i = std::next(begin); i != end; ++i) {
-    for (RandomeAccessIterator j = i; j != begin; --j) {
-      RandomeAccessIterator pre = std::prev(j);
+  for (RandomAccessIterator i = std::next(begin); i != end; ++i) {
+    for (RandomAccessIterator j = i; j != begin; --j) {
+      RandomAccessIterator pre = std::prev(j);
       if (comp(*pre, *j)) break;
       std::swap(*pre, *j);
     }
   }
 }
 
-template<typename RandomeAccessIterator>
-void InsertionSort(RandomeAccessIterator begin, RandomeAccessIterator end) {
+template<typename RandomAccessIterator>
+void InsertionSort(RandomAccessIterator begin, RandomAccessIterator end) {
   using value_type =
-    typename std::iterator_traits<RandomeAccessIterator>::value_type;
+    typename std::iterator_traits<RandomAccessIterator>::value_type;
   InsertionSort(begin, end, std::less<value_type>());
 }
 
