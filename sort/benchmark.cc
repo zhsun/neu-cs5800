@@ -7,7 +7,7 @@
 #include <iostream>
 #include <vector>
 
-#include "sort/heapsort/heap_sort.h"
+#include "sort/heap_sort.hpp"
 #include "sort/quicksort/quick_sort.h"
 
 using namespace std;
@@ -40,27 +40,24 @@ void MeasureTime(std::function<void()> f) {
 }
 
 void BenchmarkOnInts() {
-  vector<int> input;
-  ReadData(kRandomIntFilename, kCount, input);
-  vector<int> sort_input = input;
-  cout << "Quicksort on 1M integers." << endl;
-  MeasureTime(bind(Quicksort, sort_input));
+  vector<int> data;
+  ReadData(kRandomIntFilename, kCount, data);
 
-  cout << "Heapsort on 1M integers." << endl;
-  sort_input = input;
-  MeasureTime(bind(Heapsort, sort_input));
+  cout << "QuickSort on 1M integers." << endl;
+  vector<int> input = data;
+  MeasureTime([&input]() { Quicksort(input); });
+
+  cout << "HeapSort on 1M integers." << endl;
+  input = data;
+  MeasureTime([&input]() { HeapSort(input.begin(), input.end()); });
 
   cout << "std::sort on 1M integers." << endl;
-  sort_input = input;
-  MeasureTime(bind(std::sort<vector<int>::iterator>,
-		   sort_input.begin(),
-		   sort_input.end()));
+  input = data;
+  MeasureTime([&input]() { sort(input.begin(), input.end()); });
 
   cout << "std::stable_sort on 1M integers." << endl;
-  sort_input = input;
-  MeasureTime(bind(std::stable_sort<vector<int>::iterator>,
-		   sort_input.begin(),
-		   sort_input.end()));
+  input = data;
+  MeasureTime([&input]() { std::stable_sort(input.begin(), input.end()); });
 }
 
 int main() {

@@ -9,12 +9,12 @@ include(gmock)
 # Set up complie error options.
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" OR
     "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-  set(warnings "-Wall -Wextra -Werror")
+  set(warnings "-Wall -Wextra")
 endif()
 set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS} ${warnings}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${warnings}")
 # Add compiler definition.
-add_definitions(-std=c++0x)
+add_definitions(-std=c++11)
 
 # Add subdirectories
 add_subdirectory("data_structure/bst")
@@ -26,7 +26,6 @@ add_subdirectory("recursion/permutation")
 add_subdirectory("recursion/order_stats")
 add_subdirectory("recursion/strassen")
 add_subdirectory("sort/countingsort")
-add_subdirectory("sort/heapsort")
 add_subdirectory("sort/mergesort")
 add_subdirectory("sort/quicksort")
 add_subdirectory("sort/radixsort")
