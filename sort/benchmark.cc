@@ -7,9 +7,11 @@
 #include <iostream>
 #include <vector>
 
+#include "sort/counting_sort.hpp"
 #include "sort/heap_sort.hpp"
 #include "sort/merge_sort.hpp"
 #include "sort/quick_sort.hpp"
+#include "sort/radix_sort.hpp"
 
 using namespace std;
 
@@ -30,6 +32,14 @@ void ReadData(const char* filename, size_t elem_count, vector<T>& data) {
   assert(data.size() == elem_count);
 }
 
+template<typename T>
+bool IsSorted(const vector<T>& data) {
+  for (size_t i = 1; i < data.size(); ++i) {
+    if (data[i-1] > data[i]) return false;
+  }
+  return true;
+}
+
 void MeasureTime(std::function<void()> f) {
   using namespace std::chrono;
   auto start = high_resolution_clock::now();
@@ -40,32 +50,92 @@ void MeasureTime(std::function<void()> f) {
        << " milliseconds. " << endl;
 }
 
-void BenchmarkOnInts() {
+void BenchmarkOnInt() {
   vector<int> data;
   ReadData(kRandomIntFilename, kCount, data);
 
-  cout << "QuickSort on 1M integers." << endl;
+  cout << "MergeSort" << endl;
   vector<int> input = data;
-  MeasureTime([&input]() { QuickSort(input.begin(), input.end()); });
-
-  cout << "HeapSort on 1M integers." << endl;
-  input = data;
-  MeasureTime([&input]() { HeapSort(input.begin(), input.end()); });
-
-  cout << "MergeSort on 1M integers." << endl;
-  input = data;
+  assert(!IsSorted(input));
   MeasureTime([&input]() { MergeSort(input.begin(), input.end()); });
+  assert(IsSorted(input));
 
-  cout << "std::sort on 1M integers." << endl;
+  cout << "HeapSort" << endl;
   input = data;
+  assert(!IsSorted(input));
+  MeasureTime([&input]() { HeapSort(input.begin(), input.end()); });
+  assert(IsSorted(input));
+
+  cout << "QuickSort" << endl;
+  input = data;
+  assert(!IsSorted(input));
+  MeasureTime([&input]() { QuickSort(input.begin(), input.end()); });
+  assert(IsSorted(input));
+
+  cout << "std::sort" << endl;
+  input = data;
+  assert(!IsSorted(input));
   MeasureTime([&input]() { sort(input.begin(), input.end()); });
+  assert(IsSorted(input));
 
-  cout << "std::stable_sort on 1M integers." << endl;
+  cout << "std::stable_sort" << endl;
   input = data;
+  assert(!IsSorted(input));
   MeasureTime([&input]() { std::stable_sort(input.begin(), input.end()); });
+  assert(IsSorted(input));
+}
+
+void BenchmarkOnInt3d() {
+  vector<int> data;
+  ReadData(kRandomInt3dFilename, kCount, data);
+
+  cout << "MergeSort" << endl;
+  vector<int> input = data;
+  assert(!IsSorted(input));
+  MeasureTime([&input]() { MergeSort(input.begin(), input.end()); });
+  assert(IsSorted(input));
+
+  cout << "HeapSort" << endl;
+  input = data;
+  assert(!IsSorted(input));
+  MeasureTime([&input]() { HeapSort(input.begin(), input.end()); });
+  assert(IsSorted(input));
+
+  cout << "QuickSort" << endl;
+  input = data;
+  assert(!IsSorted(input));
+  MeasureTime([&input]() { QuickSort(input.begin(), input.end()); });
+  assert(IsSorted(input));
+
+  cout << "CountingSort" << endl;
+  input = data;
+  assert(!IsSorted(input));
+  MeasureTime([&input]() {
+      CountingSort(input.begin(), input.end(), 
+		   [](int x) { return x; }, 1000);
+    });
+  assert(IsSorted(input));
+
+  cout << "RadixSort" << endl;
+  input = data;
+  assert(!IsSorted(input));
+  MeasureTime([&input]() { RadixSort(input.begin(), input.end(), 3); });
+  assert(IsSorted(input));
+
+  cout << "std::sort" << endl;
+  input = data;
+  assert(!IsSorted(input));
+  MeasureTime([&input]() { std::sort(input.begin(), input.end()); });
+  assert(IsSorted(input));
 }
 
 int main() {
-  BenchmarkOnInts();
+  cout << "Benchmark on 1M random integers." << endl;
+  BenchmarkOnInt();
+  cout << endl;
+
+  cout << "Benchmark on 1M random 3 digit-integers." << endl;
+  BenchmarkOnInt3d();
+  cout << endl;
   return 0;
 }
