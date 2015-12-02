@@ -1,4 +1,0 @@
-add_library(quick_sort quick_sort.cpp)
-
-add_gmock_test(quick_sort_unittest quick_sort_test.cpp)
-target_link_libraries(quick_sort_unittest quick_sort)

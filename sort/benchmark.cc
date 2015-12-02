@@ -9,7 +9,7 @@
 
 #include "sort/heap_sort.hpp"
 #include "sort/merge_sort.hpp"
-#include "sort/quicksort/quick_sort.h"
+#include "sort/quick_sort.hpp"
 
 using namespace std;
 
@@ -46,7 +46,7 @@ void BenchmarkOnInts() {
 
   cout << "QuickSort on 1M integers." << endl;
   vector<int> input = data;
-  MeasureTime([&input]() { Quicksort(input); });
+  MeasureTime([&input]() { QuickSort(input.begin(), input.end()); });
 
   cout << "HeapSort on 1M integers." << endl;
   input = data;
