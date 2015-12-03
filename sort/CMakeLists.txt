@@ -5,6 +5,7 @@ add_gmock_test(merge_sort_unittest merge_sort_test.cpp)
 add_gmock_test(quick_sort_unittest quick_sort_test.cpp)
 add_gmock_test(counting_sort_unittest counting_sort_test.cpp)
 add_gmock_test(radix_sort_unittest radix_sort_test.cpp)
+add_gmock_test(sort_unittest sort_test.cpp)
 
 add_executable(sorting_benchmark benchmark.cc)
 

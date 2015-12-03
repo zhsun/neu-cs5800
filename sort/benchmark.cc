@@ -12,6 +12,7 @@
 #include "sort/merge_sort.hpp"
 #include "sort/quick_sort.hpp"
 #include "sort/radix_sort.hpp"
+#include "sort/sort.hpp"
 
 using namespace std;
 
@@ -72,6 +73,12 @@ void BenchmarkOnInt() {
   MeasureTime([&input]() { QuickSort(input.begin(), input.end()); });
   assert(IsSorted(input));
 
+  cout << "Sort" << endl;
+  input = data;
+  assert(!IsSorted(input));
+  MeasureTime([&input]() { Sort(input.begin(), input.end()); });
+  assert(IsSorted(input));
+
   cout << "std::sort" << endl;
   input = data;
   assert(!IsSorted(input));
@@ -107,6 +114,12 @@ void BenchmarkOnInt3d() {
   MeasureTime([&input]() { QuickSort(input.begin(), input.end()); });
   assert(IsSorted(input));
 
+  cout << "Sort" << endl;
+  input = data;
+  assert(!IsSorted(input));
+  MeasureTime([&input]() { Sort(input.begin(), input.end()); });
+  assert(IsSorted(input));
+
   cout << "CountingSort" << endl;
   input = data;
   assert(!IsSorted(input));
@@ -126,6 +139,12 @@ void BenchmarkOnInt3d() {
   input = data;
   assert(!IsSorted(input));
   MeasureTime([&input]() { std::sort(input.begin(), input.end()); });
+  assert(IsSorted(input));
+
+  cout << "std::stable_sort" << endl;
+  input = data;
+  assert(!IsSorted(input));
+  MeasureTime([&input]() { std::stable_sort(input.begin(), input.end()); });
   assert(IsSorted(input));
 }
 
