@@ -33,14 +33,6 @@ void ReadData(const char* filename, size_t elem_count, vector<T>& data) {
   assert(data.size() == elem_count);
 }
 
-template<typename T>
-bool IsSorted(const vector<T>& data) {
-  for (size_t i = 1; i < data.size(); ++i) {
-    if (data[i-1] > data[i]) return false;
-  }
-  return true;
-}
-
 void MeasureTime(std::function<void()> f) {
   using namespace std::chrono;
   auto start = high_resolution_clock::now();
@@ -57,39 +49,39 @@ void BenchmarkOnInt() {
 
   cout << "MergeSort" << endl;
   vector<int> input = data;
-  assert(!IsSorted(input));
+  assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { MergeSort(input.begin(), input.end()); });
-  assert(IsSorted(input));
+  assert(is_sorted(input.begin(), input.end()));
 
   cout << "HeapSort" << endl;
   input = data;
-  assert(!IsSorted(input));
+  assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { HeapSort(input.begin(), input.end()); });
-  assert(IsSorted(input));
+  assert(is_sorted(input.begin(), input.end()));
 
   cout << "QuickSort" << endl;
   input = data;
-  assert(!IsSorted(input));
+  assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { QuickSort(input.begin(), input.end()); });
-  assert(IsSorted(input));
+  assert(is_sorted(input.begin(), input.end()));
 
   cout << "Sort" << endl;
   input = data;
-  assert(!IsSorted(input));
+  assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { Sort(input.begin(), input.end()); });
-  assert(IsSorted(input));
+  assert(is_sorted(input.begin(), input.end()));
 
   cout << "std::sort" << endl;
   input = data;
-  assert(!IsSorted(input));
+  assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { sort(input.begin(), input.end()); });
-  assert(IsSorted(input));
+  assert(is_sorted(input.begin(), input.end()));
 
   cout << "std::stable_sort" << endl;
   input = data;
-  assert(!IsSorted(input));
+  assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { std::stable_sort(input.begin(), input.end()); });
-  assert(IsSorted(input));
+  assert(is_sorted(input.begin(), input.end()));
 }
 
 void BenchmarkOnInt3d() {
@@ -98,54 +90,54 @@ void BenchmarkOnInt3d() {
 
   cout << "MergeSort" << endl;
   vector<int> input = data;
-  assert(!IsSorted(input));
+  assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { MergeSort(input.begin(), input.end()); });
-  assert(IsSorted(input));
+  assert(is_sorted(input.begin(), input.end()));
 
   cout << "HeapSort" << endl;
   input = data;
-  assert(!IsSorted(input));
+  assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { HeapSort(input.begin(), input.end()); });
-  assert(IsSorted(input));
+  assert(is_sorted(input.begin(), input.end()));
 
   cout << "QuickSort" << endl;
   input = data;
-  assert(!IsSorted(input));
+  assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { QuickSort(input.begin(), input.end()); });
-  assert(IsSorted(input));
+  assert(is_sorted(input.begin(), input.end()));
 
   cout << "Sort" << endl;
   input = data;
-  assert(!IsSorted(input));
+  assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { Sort(input.begin(), input.end()); });
-  assert(IsSorted(input));
+  assert(is_sorted(input.begin(), input.end()));
 
   cout << "CountingSort" << endl;
   input = data;
-  assert(!IsSorted(input));
+  assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() {
       CountingSort(input.begin(), input.end(), 
 		   [](int x) { return x; }, 1000);
     });
-  assert(IsSorted(input));
+  assert(is_sorted(input.begin(), input.end()));
 
   cout << "RadixSort" << endl;
   input = data;
-  assert(!IsSorted(input));
+  assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { RadixSort(input.begin(), input.end(), 3); });
-  assert(IsSorted(input));
+  assert(is_sorted(input.begin(), input.end()));
 
   cout << "std::sort" << endl;
   input = data;
-  assert(!IsSorted(input));
+  assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { std::sort(input.begin(), input.end()); });
-  assert(IsSorted(input));
+  assert(is_sorted(input.begin(), input.end()));
 
   cout << "std::stable_sort" << endl;
   input = data;
-  assert(!IsSorted(input));
+  assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { std::stable_sort(input.begin(), input.end()); });
-  assert(IsSorted(input));
+  assert(is_sorted(input.begin(), input.end()));
 }
 
 int main() {
