@@ -9,7 +9,7 @@ include(gmock)
 # Set up complie error options.
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" OR
     "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-  set(warnings "-Wall -Wextra")
+  set(warnings "-Wall -Wextra -O2")
 endif()
 set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS} ${warnings}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${warnings}")
