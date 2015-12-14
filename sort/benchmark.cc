@@ -12,6 +12,7 @@
 #include "sort/merge_sort.hpp"
 #include "sort/quick_sort.hpp"
 #include "sort/radix_sort.hpp"
+#include "sort/shell_sort.hpp"
 #include "sort/sort.hpp"
 
 using namespace std;
@@ -88,6 +89,12 @@ void BenchmarkOnInt() {
   assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { std::stable_sort(input.begin(), input.end()); });
   assert(is_sorted(input.begin(), input.end()));
+
+  cout << "ShellSort" << endl;
+  input = data;
+  assert(!is_sorted(input.begin(), input.end()));
+  MeasureTime([&input]() { ShellSort(input.begin(), input.end()); });
+  assert(is_sorted(input.begin(), input.end()));
 }
 
 void BenchmarkOnInt3d() {
@@ -149,6 +156,12 @@ void BenchmarkOnInt3d() {
   input = data;
   assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { RadixSort(input.begin(), input.end(), 3); });
+  assert(is_sorted(input.begin(), input.end()));
+
+  cout << "ShellSort" << endl;
+  input = data;
+  assert(!is_sorted(input.begin(), input.end()));
+  MeasureTime([&input]() { ShellSort(input.begin(), input.end()); });
   assert(is_sorted(input.begin(), input.end()));
 }
 

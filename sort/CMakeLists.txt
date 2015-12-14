@@ -1,5 +1,6 @@
 add_gmock_test(selection_sort_unittest selection_sort_test.cpp)
 add_gmock_test(insertion_sort_unittest insertion_sort_test.cpp)
+add_gmock_test(shell_sort_unittest shell_sort_test.cpp)
 add_gmock_test(heap_sort_unittest heap_sort_test.cpp)
 add_gmock_test(merge_sort_unittest merge_sort_test.cpp)
 add_gmock_test(quick_sort_unittest quick_sort_test.cpp)
