@@ -16,3 +16,6 @@ configure_file(datafile/random_int_1m
 configure_file(datafile/random_int3d_1m 
   ${CMAKE_CURRENT_BINARY_DIR}/datafile/random_int3d_1m
   COPYONLY)
+configure_file(datafile/random_float_1m 
+  ${CMAKE_CURRENT_BINARY_DIR}/datafile/random_float_1m
+  COPYONLY)

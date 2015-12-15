@@ -20,6 +20,26 @@ using namespace std;
 const size_t kCount = 1000000;
 const char kRandomIntFilename[] = "datafile/random_int_1m";
 const char kRandomInt3dFilename[] = "datafile/random_int3d_1m";
+const char kRandomFloatFilename[] = "datafile/random_float_1m";
+
+void BenchmarkOnInt();
+void BenchmarkOnInt3d();
+void BenchmarkOnFloat();
+
+int main() {
+  cout << "Benchmark on 1M random integers." << endl;
+  BenchmarkOnInt();
+  cout << endl;
+
+  cout << "Benchmark on 1M random 3 digit-integers." << endl;
+  BenchmarkOnInt3d();
+  cout << endl;
+
+  cout << "Benchmark on 1M random floating numbers." << endl;
+  BenchmarkOnFloat();
+  cout << endl;
+  return 0;
+}
 
 template<typename T>
 void ReadData(const char* filename, size_t elem_count, vector<T>& data) {
@@ -39,8 +59,7 @@ void MeasureTime(std::function<void()> f) {
   auto start = high_resolution_clock::now();
   f();
   auto end = high_resolution_clock::now();
-  cout << "Time used: " 
-       << duration_cast<milliseconds>(end - start).count()
+  cout << duration_cast<milliseconds>(end - start).count()
        << " milliseconds. " << endl;
 }
 
@@ -48,49 +67,49 @@ void BenchmarkOnInt() {
   vector<int> data;
   ReadData(kRandomIntFilename, kCount, data);
 
-  cout << "MergeSort" << endl;
+  cout << "MergeSort: ";
   vector<int> input = data;
   assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { MergeSort(input.begin(), input.end()); });
   assert(is_sorted(input.begin(), input.end()));
 
-  cout << "MergeSortBottomUp" << endl;
+  cout << "MergeSortBottomUp: ";
   input = data;
   assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { MergeSortBottomUp(input.begin(), input.end()); });
   assert(is_sorted(input.begin(), input.end()));
 
-  cout << "HeapSort" << endl;
+  cout << "HeapSort: ";
   input = data;
   assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { HeapSort(input.begin(), input.end()); });
   assert(is_sorted(input.begin(), input.end()));
 
-  cout << "QuickSort" << endl;
+  cout << "QuickSort: ";
   input = data;
   assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { QuickSort(input.begin(), input.end()); });
   assert(is_sorted(input.begin(), input.end()));
 
-  cout << "Sort" << endl;
+  cout << "Sort: ";
   input = data;
   assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { Sort(input.begin(), input.end()); });
   assert(is_sorted(input.begin(), input.end()));
 
-  cout << "std::sort" << endl;
+  cout << "std::sort: ";
   input = data;
   assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { sort(input.begin(), input.end()); });
   assert(is_sorted(input.begin(), input.end()));
 
-  cout << "std::stable_sort" << endl;
+  cout << "std::stable_sort: ";
   input = data;
   assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { std::stable_sort(input.begin(), input.end()); });
   assert(is_sorted(input.begin(), input.end()));
 
-  cout << "ShellSort" << endl;
+  cout << "ShellSort: ";
   input = data;
   assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { ShellSort(input.begin(), input.end()); });
@@ -101,49 +120,49 @@ void BenchmarkOnInt3d() {
   vector<int> data;
   ReadData(kRandomInt3dFilename, kCount, data);
 
-  cout << "MergeSort" << endl;
+  cout << "MergeSort: ";
   vector<int> input = data;
   assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { MergeSort(input.begin(), input.end()); });
   assert(is_sorted(input.begin(), input.end()));
 
-  cout << "MergeSortBottomUp" << endl;
+  cout << "MergeSortBottomUp: ";
   input = data;
   assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { MergeSortBottomUp(input.begin(), input.end()); });
   assert(is_sorted(input.begin(), input.end()));
 
-  cout << "HeapSort" << endl;
+  cout << "HeapSort: ";
   input = data;
   assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { HeapSort(input.begin(), input.end()); });
   assert(is_sorted(input.begin(), input.end()));
 
-  cout << "QuickSort" << endl;
+  cout << "QuickSort: ";
   input = data;
   assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { QuickSort(input.begin(), input.end()); });
   assert(is_sorted(input.begin(), input.end()));
 
-  cout << "Sort" << endl;
+  cout << "Sort: ";
   input = data;
   assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { Sort(input.begin(), input.end()); });
   assert(is_sorted(input.begin(), input.end()));
 
-  cout << "std::sort" << endl;
+  cout << "std::sort: ";
   input = data;
   assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { std::sort(input.begin(), input.end()); });
   assert(is_sorted(input.begin(), input.end()));
 
-  cout << "std::stable_sort" << endl;
+  cout << "std::stable_sort: ";
   input = data;
   assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { std::stable_sort(input.begin(), input.end()); });
   assert(is_sorted(input.begin(), input.end()));
 
-  cout << "CountingSort" << endl;
+  cout << "CountingSort: ";
   input = data;
   assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() {
@@ -152,26 +171,68 @@ void BenchmarkOnInt3d() {
     });
   assert(is_sorted(input.begin(), input.end()));
 
-  cout << "RadixSort" << endl;
+  cout << "RadixSort: ";
   input = data;
   assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { RadixSort(input.begin(), input.end(), 3); });
   assert(is_sorted(input.begin(), input.end()));
 
-  cout << "ShellSort" << endl;
+  cout << "ShellSort: ";
   input = data;
   assert(!is_sorted(input.begin(), input.end()));
   MeasureTime([&input]() { ShellSort(input.begin(), input.end()); });
   assert(is_sorted(input.begin(), input.end()));
 }
 
-int main() {
-  cout << "Benchmark on 1M random integers." << endl;
-  BenchmarkOnInt();
-  cout << endl;
+void BenchmarkOnFloat() {
+  vector<double> data;
+  ReadData(kRandomFloatFilename, kCount, data);
 
-  cout << "Benchmark on 1M random 3 digit-integers." << endl;
-  BenchmarkOnInt3d();
-  cout << endl;
-  return 0;
+  cout << "MergeSort: ";
+  vector<double> input = data;
+  assert(!is_sorted(input.begin(), input.end()));
+  MeasureTime([&input]() { MergeSort(input.begin(), input.end()); });
+  assert(is_sorted(input.begin(), input.end()));
+
+  cout << "MergeSortBottomUp: ";
+  input = data;
+  assert(!is_sorted(input.begin(), input.end()));
+  MeasureTime([&input]() { MergeSortBottomUp(input.begin(), input.end()); });
+  assert(is_sorted(input.begin(), input.end()));
+
+  cout << "HeapSort: ";
+  input = data;
+  assert(!is_sorted(input.begin(), input.end()));
+  MeasureTime([&input]() { HeapSort(input.begin(), input.end()); });
+  assert(is_sorted(input.begin(), input.end()));
+
+  cout << "QuickSort: ";
+  input = data;
+  assert(!is_sorted(input.begin(), input.end()));
+  MeasureTime([&input]() { QuickSort(input.begin(), input.end()); });
+  assert(is_sorted(input.begin(), input.end()));
+
+  cout << "Sort: ";
+  input = data;
+  assert(!is_sorted(input.begin(), input.end()));
+  MeasureTime([&input]() { Sort(input.begin(), input.end()); });
+  assert(is_sorted(input.begin(), input.end()));
+
+  cout << "std::sort: ";
+  input = data;
+  assert(!is_sorted(input.begin(), input.end()));
+  MeasureTime([&input]() { sort(input.begin(), input.end()); });
+  assert(is_sorted(input.begin(), input.end()));
+
+  cout << "std::stable_sort: ";
+  input = data;
+  assert(!is_sorted(input.begin(), input.end()));
+  MeasureTime([&input]() { std::stable_sort(input.begin(), input.end()); });
+  assert(is_sorted(input.begin(), input.end()));
+
+  cout << "ShellSort: ";
+  input = data;
+  assert(!is_sorted(input.begin(), input.end()));
+  MeasureTime([&input]() { ShellSort(input.begin(), input.end()); });
+  assert(is_sorted(input.begin(), input.end()));
 }
