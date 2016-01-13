@@ -1,4 +1,0 @@
-add_library(permutation permutation.cpp)
-
-add_gmock_test(permutation_unittest permutation_test.cpp)
-target_link_libraries(permutation_unittest permutation)

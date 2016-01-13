@@ -1,4 +1,0 @@
-add_library(combination combination.cpp)
-
-add_gmock_test(combination_unittest combination_test.cpp)
-target_link_libraries(combination_unittest combination)

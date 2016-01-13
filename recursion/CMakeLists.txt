@@ -1,0 +1,15 @@
+add_library(combination combination.cpp)
+add_gmock_test(combination_unittest combination_test.cpp)
+target_link_libraries(combination_unittest combination)
+
+add_library(permutation permutation.cpp)
+add_gmock_test(permutation_unittest permutation_test.cpp)
+target_link_libraries(permutation_unittest permutation)
+
+add_library(order_stats order_stats.cpp)
+add_gmock_test(order_stats_unittest order_stats_test.cpp)
+target_link_libraries(order_stats_unittest order_stats)
+
+add_library(strassen strassen.cpp)
+add_gmock_test(strassen_unittest strassen_test.cpp)
+target_link_libraries(strassen_unittest strassen)
