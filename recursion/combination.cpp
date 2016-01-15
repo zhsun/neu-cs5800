@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <iterator>
 #include <vector>
-#include "combination.h"
+#include "recursion/combination.h"
 
 void CombinationRec(const std::vector<int>& elems,
                     int i,

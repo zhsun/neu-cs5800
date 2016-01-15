@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <cmath>
 #include <iterator>
-#include "strassen.h"
+#include "recursion/strassen.h"
 
 // Forward declare.
 int next_power_of_two(int n);

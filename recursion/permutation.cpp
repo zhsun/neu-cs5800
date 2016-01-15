@@ -1,4 +1,4 @@
-#include "permutation.h"
+#include "recursion/permutation.h"
 
 void PermutationRec(std::vector<int>& elems,
                     int i,

@@ -13,3 +13,7 @@ target_link_libraries(order_stats_unittest order_stats)
 add_library(strassen strassen.cpp)
 add_gmock_test(strassen_unittest strassen_test.cpp)
 target_link_libraries(strassen_unittest strassen)
+
+add_library(fibonacci fibonacci.cpp)
+add_gmock_test(fibonacci_unittest fibonacci_test.cpp)
+target_link_libraries(fibonacci_unittest fibonacci)
