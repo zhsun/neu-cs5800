@@ -43,11 +43,20 @@ int FibonacciNumber3(int n) {
   return RoundToCloseInt(power(kGoldenRatio, n) / kRoot5);
 }
 
-struct A {
-  A() : data({1, 1, 1, 0}) { }
-  int operator[](int i) const { return data[i]; }
-  int& operator[](int i) { return data[i]; }
-  std::vector<int> data;
+class A {
+ public:
+  A() : data_({1, 1, 1, 0}) { }
+  int operator[](int i) const {
+    assert(i >= 0 && i < kSize);
+    return data_[i];
+  }
+  int& operator[](int i) {
+    assert(i >= 0 && i < kSize);
+    return data_[i];
+  }
+ private:
+  std::vector<int> data_;
+  static const int kSize = 4;
 };
 
 A operator*(const A& x, const A& y) {
