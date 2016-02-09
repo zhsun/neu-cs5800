@@ -1,6 +1,0 @@
-add_library(longest_increasing_subsequence longest_increasing_subsequence.cpp)
-
-add_gmock_test(longest_increasing_subsequence_unittest
-  longest_increasing_subsequence_test.cpp)
-target_link_libraries(longest_increasing_subsequence_unittest
-  longest_increasing_subsequence)

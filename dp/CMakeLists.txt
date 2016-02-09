@@ -1,0 +1,15 @@
+add_library(edit_distance edit_distance.cpp)
+add_gmock_test(edit_distance_unittest edit_distance_test.cpp)
+target_link_libraries(edit_distance_unittest edit_distance)
+
+add_library(knapsack knapsack.cpp)
+add_gmock_test(knapsack_unittest knapsack_test.cpp)
+target_link_libraries(knapsack_unittest knapsack)
+
+add_library(lcs longest_increasing_subsequence.cpp)
+add_gmock_test(lcs_unittest longest_increasing_subsequence_test.cpp)
+target_link_libraries(lcs_unittest lcs)
+
+add_library(matrix_multiplication matrix_multiplication.cpp)
+add_gmock_test(matrix_multiplication_unittest matrix_multiplication_test.cpp)
+target_link_libraries(matrix_multiplication_unittest matrix_multiplication)

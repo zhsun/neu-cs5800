@@ -1,4 +1,0 @@
-add_library(matrix_multiplication matrix_multiplication.cpp)
-
-add_gmock_test(matrix_multiplication_unittest matrix_multiplication_test.cpp)
-target_link_libraries(matrix_multiplication_unittest matrix_multiplication)
