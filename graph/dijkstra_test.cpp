@@ -1,7 +1,7 @@
 #include <limits>
 #include "gmock/gmock.h"
 #include "graph/graph.h"
-#include "dijkstra.h"
+#include "graph/dijkstra.h"
 
 using namespace std;
 using namespace testing;

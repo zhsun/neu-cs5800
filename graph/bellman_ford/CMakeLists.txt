@@ -1,4 +1,0 @@
-add_library(bellman_ford bellman_ford.cpp)
-
-add_gmock_test(bellman_ford_unittest bellman_ford_test.cpp)
-target_link_libraries(bellman_ford_unittest bellman_ford graph)

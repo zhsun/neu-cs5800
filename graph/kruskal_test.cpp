@@ -1,6 +1,6 @@
 #include "gmock/gmock.h"
 #include "graph/graph.h"
-#include "kruskal.h"
+#include "graph/kruskal.h"
 
 using namespace std;
 using namespace testing;

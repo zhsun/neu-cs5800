@@ -2,7 +2,7 @@
 #include <limits>
 #include "data_structure/priority_queue/priority_queue.hpp"
 #include "graph/graph.h"
-#include "dijkstra.h"
+#include "graph/dijkstra.h"
 
 void Dijkstra(const AdjacencyList& graph,
               Vertex s,

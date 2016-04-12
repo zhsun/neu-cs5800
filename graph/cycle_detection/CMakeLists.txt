@@ -1,4 +1,0 @@
-add_library(cycle_detection cycle_detection.cpp)
-
-add_gmock_test(cycle_detection_unittest cycle_detection_test.cpp)
-target_link_libraries(cycle_detection_unittest cycle_detection graph)

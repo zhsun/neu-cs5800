@@ -1,5 +1,5 @@
 #include <algorithm>
-#include "topological_sort.h"
+#include "graph/topological_sort.h"
 
 using std::vector;
 

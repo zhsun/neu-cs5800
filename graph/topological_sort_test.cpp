@@ -1,7 +1,7 @@
 #include <algorithm>
 #include "gmock/gmock.h"
 #include "graph/graph.h"
-#include "topological_sort.h"
+#include "graph/topological_sort.h"
 
 using namespace std;
 using namespace testing;

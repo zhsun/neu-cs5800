@@ -1,6 +1,6 @@
 #include "gmock/gmock.h"
 #include "graph/graph.h"
-#include "bellman_ford.h"
+#include "graph/bellman_ford.h"
 
 using namespace std;
 using namespace testing;

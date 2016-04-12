@@ -1,6 +1,6 @@
 #include "gmock/gmock.h"
 #include "graph/graph.h"
-#include "scc.h"
+#include "graph/scc.h"
 
 using namespace std;
 using namespace testing;

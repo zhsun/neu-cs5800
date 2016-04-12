@@ -1,4 +1,0 @@
-add_library(floyd_warshall floyd_warshall.cpp)
-
-add_gmock_test(floyd_warshall_unittest floyd_warshall_test.cpp)
-target_link_libraries(floyd_warshall_unittest floyd_warshall graph)

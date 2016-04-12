@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <cassert>
 #include <limits>
-#include "bellman_ford.h"
+#include "graph/bellman_ford.h"
 
 // Return true if any distance is updated; false otherwise.
 bool RelaxAllEdges(const AdjacencyList& graph,

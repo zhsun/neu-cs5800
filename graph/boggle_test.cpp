@@ -1,5 +1,5 @@
 #include "gmock/gmock.h"
-#include "boggle.h"
+#include "graph/boggle.h"
 
 using namespace std;
 using namespace testing;

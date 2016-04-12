@@ -3,7 +3,7 @@
 #include <limits>
 #include "data_structure/priority_queue/priority_queue.hpp"
 #include "graph/graph.h"
-#include "prim.h"
+#include "graph/prim.h"
 
 using std::vector;
 

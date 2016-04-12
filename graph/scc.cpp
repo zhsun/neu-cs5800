@@ -1,7 +1,7 @@
 #include <vector>
 #include "graph/graph.h"
-#include "graph/topological_sort/topological_sort.h"
-#include "scc.h"
+#include "graph/topological_sort.h"
+#include "graph/scc.h"
 
 using std::vector;
 

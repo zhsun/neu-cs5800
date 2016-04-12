@@ -1,4 +1,4 @@
-#include "boggle.h"
+#include "graph/boggle.h"
 
 using std::string;
 using std::unordered_set;

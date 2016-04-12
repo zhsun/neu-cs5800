@@ -1,5 +1,5 @@
 #include <vector>
-#include "cycle_detection.h"
+#include "graph/cycle_detection.h"
 
 using std::vector;
 
