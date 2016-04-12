@@ -1,5 +1,5 @@
 #include <cassert>
-#include "disjoint_set.h"
+#include "data_structure/disjoint_set.h"
 
 DisjointSet::DisjointSet(size_t n) : parent_(n), rank_(n, 1) {
   for (size_t i = 0; i < n; ++i) {

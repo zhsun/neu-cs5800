@@ -3,7 +3,7 @@
 #include <memory>
 
 #include "gmock/gmock.h"
-#include "bst.hpp"
+#include "data_structure/bst.hpp"
 
 using namespace std;
 using namespace testing;

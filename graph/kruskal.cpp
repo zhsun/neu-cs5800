@@ -1,6 +1,6 @@
 #include <algorithm>
 #include <cassert>
-#include "data_structure/disjoint_set/disjoint_set.h"
+#include "data_structure/disjoint_set.h"
 #include "graph/graph.h"
 #include "graph/kruskal.h"
 

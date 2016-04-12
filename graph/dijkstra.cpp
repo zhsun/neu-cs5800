@@ -1,6 +1,6 @@
 #include <functional>
 #include <limits>
-#include "data_structure/priority_queue/priority_queue.hpp"
+#include "data_structure/priority_queue.hpp"
 #include "graph/graph.h"
 #include "graph/dijkstra.h"
 

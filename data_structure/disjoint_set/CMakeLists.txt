@@ -1,4 +1,0 @@
-add_library(disjoint_set disjoint_set.cpp)
-
-add_gmock_test(disjoint_set_unittest disjoint_set_test.cpp)
-target_link_libraries(disjoint_set_unittest disjoint_set)

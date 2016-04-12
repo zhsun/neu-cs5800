@@ -17,10 +17,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${warnings}")
 add_definitions(-std=c++11)
 
 # Add subdirectories
-add_subdirectory("data_structure/bst")
-add_subdirectory("data_structure/priority_queue")
-add_subdirectory("data_structure/disjoint_set")
-add_subdirectory("data_structure/heap")
+add_subdirectory("data_structure")
 add_subdirectory("sort")
 add_subdirectory("recursion")
 add_subdirectory("dp")

@@ -1,5 +1,5 @@
-#include "heap.hpp"
-#include "heap_function.hpp"
+#include "data_structure/heap.hpp"
+#include "data_structure/heap_function.hpp"
 #include "gmock/gmock.h"
 
 using namespace std;

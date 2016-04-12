@@ -1,5 +1,5 @@
 #include "gmock/gmock.h"
-#include "disjoint_set.h"
+#include "data_structure/disjoint_set.h"
 
 using namespace testing;
 

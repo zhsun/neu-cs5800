@@ -1,1 +1,0 @@
-add_gmock_test(bst_unittest bst_test.cpp)
