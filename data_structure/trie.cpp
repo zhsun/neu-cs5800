@@ -118,12 +118,27 @@ int Trie::WordCountWithPrefixRecursively(Node* cur, const char* prefix) const {
   return WordCountWithPrefixRecursively(cur->next_[i].get(), prefix + 1);
 }
 
-vector<string> Trie::WordsWithPrefix(const char* prefix) const {
-  // TODO
-  return vector<string>();
+string Trie::LongestPrefix(const char* str) const {
+  assert(*str != kNullChar);
+  const char* last = LongestPrefix(root_.get(), str);
+  if (last == nullptr) {
+    return "";
+  }
+  return std::string(str, last - str);
 }
 
-string Trie::LongestPrefix(const char* str) const {
-  // TODO
-  return string();
+const char* Trie::LongestPrefix(Node* cur, const char* str) const {
+  assert(cur != nullptr);
+  if (*str == kNullChar) {
+    return cur->is_word_ ? str : nullptr;
+  }
+  int i = static_cast<int>(*str);
+  if (cur->next_[i] == nullptr) {
+    return cur->is_word_ ? str : nullptr;
+  }
+  const char* rec = LongestPrefix(cur->next_[i].get(), str + 1);
+  if (rec != nullptr) {
+    return rec;
+  }
+  return cur->is_word_ ? str : nullptr;
 }

@@ -133,3 +133,20 @@ TEST(TrieTest, WordCountWithPrefix) {
   EXPECT_THAT(trie.WordCountWithPrefix("app"), testing::Eq(0));
   EXPECT_THAT(trie.WordCountWithPrefix("ap"), testing::Eq(0));
 }
+
+TEST(TrieTest, LongestPrefix) {
+  Trie trie;
+  EXPECT_THAT(trie.LongestPrefix("apply"), testing::Eq(""));
+  trie.Insert("apple");
+  EXPECT_THAT(trie.LongestPrefix("apply"), testing::Eq(""));
+  trie.Insert("boy");
+  EXPECT_THAT(trie.LongestPrefix("apply"), testing::Eq(""));
+  trie.Insert("app");
+  EXPECT_THAT(trie.LongestPrefix("apply"), testing::Eq("app"));
+  trie.Insert("apply");
+  EXPECT_THAT(trie.LongestPrefix("apply"), testing::Eq("apply"));
+  trie.Delete("app");
+  EXPECT_THAT(trie.LongestPrefix("apply"), testing::Eq("apply"));
+  trie.Delete("apply");
+  EXPECT_THAT(trie.LongestPrefix("apply"), testing::Eq(""));
+}

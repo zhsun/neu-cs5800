@@ -38,9 +38,6 @@ class Trie {
   // Return the number of "words" in this Trie that start with "prefix".
   int WordCountWithPrefix(const char* prefix) const;
 
-  // Return all "words" in this Trie that start with "prefix".
-  std::vector<std::string> WordsWithPrefix(const char* prefix) const;
-
   // Return the "word" in this Trie that is the longest prefix of
   // "str".
   std::string LongestPrefix(const char* str) const;
@@ -65,6 +62,7 @@ class Trie {
   bool ContainRecursively(Node* cur, const char* word) const;
   bool DeleteRecursively(Node* cur, const char* word);
   int WordCountWithPrefixRecursively(Node* cur, const char* prefix) const;
+  const char* LongestPrefix(Node* cur, const char* str) const;
 };
 
 #endif  // DATA_STRUCTURE_TRIE_H_
