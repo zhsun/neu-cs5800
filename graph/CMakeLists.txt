@@ -37,3 +37,7 @@ target_link_libraries(prim_unittest prim graph)
 add_library(kruskal kruskal.cpp)
 add_gmock_test(kruskal_unittest kruskal_test.cpp)
 target_link_libraries(kruskal_unittest kruskal graph disjoint_set)
+
+add_library(puzzle8 puzzle8.cpp)
+add_gmock_test(puzzle8_unittest puzzle8_test.cpp)
+target_link_libraries(puzzle8_unittest puzzle8)
